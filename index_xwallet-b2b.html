@@ -1,0 +1,1967 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>xWallet B2B × Рег.ру — Customer Journey Map</title>
+<meta name="description" content="Интерактивный клиентский путь xWallet для бизнеса: расчётный счёт в Альфа-Банке и кошелёк на сайте Рег.ру">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23FFFFFF'/><circle cx='24' cy='24' r='11' fill='%2335CB63'/><circle cx='40' cy='24' r='11' fill='%2335CB63'/><circle cx='24' cy='40' r='11' fill='%2335CB63'/><circle cx='40' cy='40' r='11' fill='%2335CB63'/><circle cx='32' cy='32' r='5.5' fill='%23fff'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFFFFF; --bg-warm:#F2F4F7; --surface-1:#EFF1F5; --surface-2:#E5E8EE; --surface-3:#D8DCE4;
+  --line-1:rgba(10,10,10,0.07); --line-2:rgba(10,10,10,0.12); --line-3:rgba(10,10,10,0.20);
+  --ink-1:#1C1E22; --ink-2:rgba(10,10,10,0.64); --ink-3:rgba(10,10,10,0.42); --ink-4:rgba(10,10,10,0.26);
+  --lime:#35CB63; --lime-deep:#17A247; --lime-soft:#E8FAEE; --lime-card:#A9E9C0; --lime-glow:rgba(53,203,99,0.50);
+  --phone-bg:#FFFFFF; --phone-surf:#F5F5F2; --phone-text-1:#0A0A0A; --phone-text-2:#8A8A86; --phone-text-3:#B6B6B0; --phone-line-1:#ECECE7;
+  --font-body:'Onest',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;
+  --radius-sm:8px; --radius:12px; --radius-lg:20px; --radius-xl:28px;
+  --ease-silky:cubic-bezier(0.16,1,0.3,1); --ease-swift:cubic-bezier(0.4,0,0.2,1);
+  --ng-bg:#0A0A0A; --ng-on:#FFFFFF; --ng-on-2:rgba(255,255,255,0.66); --ng-on-3:rgba(255,255,255,0.40); --ng-line:rgba(255,255,255,0.12); --ng-surf:rgba(255,255,255,0.045); --ng-surf-2:rgba(255,255,255,0.07);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:var(--bg);color:var(--ink-1)}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);font-feature-settings:"ss01","cv01";-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;overflow-x:hidden}
+button{font-family:inherit;border:none;background:none;color:inherit;cursor:pointer;letter-spacing:inherit}
+button:focus{outline:none}
+button:focus-visible{outline:2px solid var(--ink-1);outline-offset:3px;border-radius:4px}
+::selection{background:var(--lime);color:#fff}
+::-webkit-scrollbar{width:7px;height:7px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(10,10,10,0.12);border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:rgba(10,10,10,0.22)}
+.num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
+.mono{font-family:var(--font-mono);font-feature-settings:"tnum"}
+.mesh-base{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(60vw 60vw at 88% -8%, rgba(53,203,99,0.16), transparent 55%),radial-gradient(50vw 50vw at -8% 18%, rgba(53,203,99,0.10), transparent 60%),radial-gradient(70vw 45vw at 50% 112%, rgba(53,203,99,0.08), transparent 55%)}
+.mesh-orb{position:fixed;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0;opacity:0.5}
+.mesh-orb.a{width:460px;height:460px;top:-140px;right:-80px;background:radial-gradient(circle, rgba(53,203,99,0.6) 0%, rgba(53,203,99,0) 70%);animation:orbA 20s ease-in-out infinite alternate}
+.mesh-orb.b{width:380px;height:380px;top:34vh;left:-150px;background:radial-gradient(circle, rgba(53,203,99,0.4) 0%, rgba(53,203,99,0) 70%);animation:orbB 24s ease-in-out infinite alternate}
+@keyframes orbA{0%{transform:translate(0,0) scale(1)}100%{transform:translate(-70px,50px) scale(1.12)}}
+@keyframes orbB{0%{transform:translate(0,0) scale(1)}100%{transform:translate(100px,-30px) scale(0.92)}}
+.hero::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;background-image:radial-gradient(circle at 1px 1px, rgba(28,30,34,0.085) 1px, transparent 0);background-size:26px 26px;-webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,0.75),transparent 78%);mask-image:linear-gradient(180deg,rgba(0,0,0,0.75),transparent 78%)}
+.hero>*{position:relative;z-index:1}
+.grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0.035;mix-blend-mode:multiply;background-image:url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>")}
+.spotlight{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(300px 300px at var(--mx,50%) var(--my,30%), rgba(53,203,99,0.10), transparent 70%);transition:background 80ms linear}
+#root{position:relative;z-index:2}
+.eyebrow{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.18em;color:var(--ink-3);display:inline-flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:24px;height:3px;background:var(--lime);border-radius:1px}
+.eyebrow.no-mark::before{display:none}
+.dot{display:inline-block;width:3px;height:3px;border-radius:50%;background:var(--ink-4);vertical-align:middle}
+.mark-hl{position:relative;display:inline-block}
+.mark-hl>span{position:relative;z-index:1}
+.mark-hl::after{content:"";position:absolute;left:-0.04em;right:-0.04em;bottom:0.1em;height:0.36em;background:var(--lime);z-index:0;border-radius:2px}
+.phone-screen{background:var(--phone-bg);color:var(--phone-text-1);height:100%;display:flex;flex-direction:column}
+.phone-status{padding:6px 16px 8px;display:flex;justify-content:space-between;align-items:center;font-size:10px;font-weight:600;color:var(--phone-text-1)}
+.phone-titlebar{padding:4px 14px 8px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--phone-line-1)}
+.mobile-step-nav{display:none}
+.ng-work{display:grid;grid-template-columns:auto minmax(0,1fr);gap:56px;align-items:center}
+.ng-extra-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line-2)}
+.ng-metrics{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
+@media (max-width:960px){
+  .mobile-step-nav{display:inline-flex;align-items:center;gap:14px;padding:6px 6px;background:var(--bg);border:1px solid var(--line-2);border-radius:99px;box-shadow:0 8px 30px rgba(0,0,0,0.10)}
+  .mobile-step-nav button{width:40px;height:40px;border-radius:50%;border:none;background:var(--surface-1);color:var(--ink-1);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s ease,color .2s ease,transform .15s ease;-webkit-tap-highlight-color:transparent}
+  .mobile-step-nav button:not(:disabled):active{transform:scale(0.94)}
+  .mobile-step-nav button:not(:disabled):hover{background:var(--ink-1);color:#fff}
+  .mobile-step-nav button:disabled{opacity:.3;cursor:default}
+  .mobile-step-nav .counter{font-size:14px;color:var(--ink-2);font-weight:600;letter-spacing:0.02em;min-width:60px;text-align:center}
+}
+@media (max-width:1100px){.hero-top{}
+@media (max-width:900px){.hero-top{grid-template-columns:1fr !important;gap:18px !important}}
+.hero-grid{grid-template-columns:1fr !important;gap:28px !important;align-items:start !important}}
+@media (max-width:960px){
+  .work-grid{grid-template-columns:1fr !important;gap:48px !important}
+  .work-grid>*:first-child{display:flex;justify-content:center}
+  .bento-grid{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+  .bento-grid>.b-large{grid-column:span 2 !important;grid-row:span 1 !important}
+}
+@media (max-width:720px){
+  .hero{padding:72px 20px 40px !important}
+  .section{padding-left:20px !important;padding-right:20px !important}
+  .step-rail{display:flex !important;grid-template-columns:none !important;gap:10px !important;overflow-x:auto;padding-bottom:10px !important;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity}
+  .step-rail-item{flex:0 0 140px !important;min-width:140px !important;scroll-snap-align:start}
+  .metrics-grid{grid-template-columns:1fr !important}
+  .metrics-grid>.m-r{padding-left:0 !important;padding-top:24px !important;border-left:none !important;border-top:1px solid var(--line-2) !important}
+  .bento-grid{grid-template-columns:1fr !important}
+  .bento-grid>.b-large{grid-column:span 1 !important}
+  h1.display{font-size:52px !important;letter-spacing:-0.04em !important}
+}
+@media (max-width:960px){
+  .ng-work{grid-template-columns:1fr !important;gap:40px !important}
+  .ng-work>*:first-child{display:flex;justify-content:center}
+  .ng-extra-grid{grid-template-columns:1fr !important}
+  .ng-metrics{grid-template-columns:1fr !important}
+}
+@media (max-width:720px){
+  .ng{padding:64px 20px !important}
+  .ng-pills{overflow-x:auto;flex-wrap:nowrap !important;-webkit-overflow-scrolling:touch}
+  .ng-pills::-webkit-scrollbar{display:none}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important}}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/framer-motion@11.18.2/dist/framer-motion.js"></script>
+</head>
+<body>
+<template id="__bundler_thumbnail" data-bg-color="#FFFFFF">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#FFFFFF"/>
+    <text x="120" y="392" fill="#0A0A0A" font-family="system-ui" font-weight="800" font-size="92" letter-spacing="-3">xWallet</text>
+    <rect x="118" y="300" width="470" height="118" rx="10" fill="#35CB63" opacity="0"/>
+    <text x="120" y="392" fill="#0A0A0A" font-family="system-ui" font-weight="800" font-size="92" letter-spacing="-3">x<tspan fill="#35CB63">Wallet</tspan></text>
+    <text x="122" y="470" fill="rgba(10,10,10,0.45)" font-family="system-ui" font-size="26">для бизнеса × Рег.ру · Customer Journey Map</text>
+  </svg>
+</template>
+<div class="mesh-base"></div>
+<div class="mesh-orb a"></div>
+<div class="mesh-orb b"></div>
+<div class="grain"></div>
+<div class="spotlight" id="spotlight"></div>
+<div id="root"></div>
+<script type="text/babel" data-presets="env,react">
+const { useState, useEffect, useRef } = React;
+const { motion, AnimatePresence, useTransform, useSpring, useMotionValue, useInView, LayoutGroup } = window.Motion;
+
+const SPRING = { silky:{type:"spring",stiffness:120,damping:22,mass:0.8}, snappy:{type:"spring",stiffness:380,damping:32} };
+const EASE = [0.16, 1, 0.3, 1];
+
+/* ===== BRAND MARK ===== */
+
+function BrandLogo({height=22, color="#1C1E22", mark="#35CB63"}){
+  return (
+    <svg height={height} viewBox="0 0 113 44" fill="none" xmlns="http://www.w3.org/2000/svg" style={{display:"block",flexShrink:0}}>
+      <g transform="translate(1,10)">
+        <circle cx="7.2" cy="7.2" r="6.4" fill={mark}/>
+        <circle cx="17.8" cy="7.2" r="6.4" fill={mark}/>
+        <circle cx="7.2" cy="17.8" r="6.4" fill={mark}/>
+        <circle cx="17.8" cy="17.8" r="6.4" fill={mark}/>
+        <circle cx="12.5" cy="12.5" r="3.1" fill="#fff"/>
+      </g>
+      <text x="32" y="29" fontFamily="Onest, sans-serif" fontSize="22" fontWeight="800" fill={color} letterSpacing="-0.035em">Рег.ру</text>
+    </svg>
+  );
+}
+
+function GAMark({size=22, bg="#35CB63", ink="#FFFFFF", flat=false, radius=14}){
+  return (
+    <svg width={size} height={size} viewBox="0 0 64 64" style={{display:"block",flexShrink:0}}>
+      {!flat && <rect width="64" height="64" rx={radius} fill={bg}/>}
+      <path d="M16 20h8v24h-8zM28 20h20l-10 12 10 12H28z" fill={ink}/>
+    </svg>
+  );
+}
+function QRish({size=120, color="#0A0A0A", bg="transparent"}){
+  const n=21, cell=size/n, mods=[];
+  const inFinder=(r,c)=>{const f=(R,C)=>r>=R&&r<R+7&&c>=C&&c<C+7;return f(0,0)||f(0,n-7)||f(n-7,0);};
+  for(let r=0;r<n;r++)for(let c=0;c<n;c++){ if(inFinder(r,c))continue; if(((r*5+c*3+r*c+r)%4)===0) mods.push([r,c]); }
+  const finder=(R,C,k)=>(
+    <g key={k}>
+      <rect x={C*cell} y={R*cell} width={7*cell} height={7*cell} fill={color}/>
+      <rect x={(C+1)*cell} y={(R+1)*cell} width={5*cell} height={5*cell} fill={bg==="transparent"?"#fff":bg}/>
+      <rect x={(C+2)*cell} y={(R+2)*cell} width={3*cell} height={3*cell} fill={color}/>
+    </g>
+  );
+  return (
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} shapeRendering="crispEdges" style={{display:"block"}}>
+      {bg!=="transparent" && <rect width={size} height={size} fill={bg}/>}
+      {mods.map(([r,c],i)=><rect key={i} x={c*cell} y={r*cell} width={cell} height={cell} fill={color}/>)}
+      {finder(0,0,"a")}{finder(0,n-7,"b")}{finder(n-7,0,"c")}
+    </svg>
+  );
+}
+
+/* ===== JOURNEY DATA ===== */
+const journeys=[
+{id:"new",group:"journey",client:"new",label:"Открытие счёта и кошелька",desc:"Заявка по номеру · звонок менеджера · счёт · xWallet · первая оплата",steps:[
+  {title:"Точка входа",zone:"Рег.ру",screen:"ga_checkout",desc:"Юрлицо продлевает домены и хостинг в кабинете Рег.ру. Обычный путь — выставить счёт и ждать проводку. На оплате появляется оффер: «Оплачивайте сразу с xWallet — счёт в Альфа-Банке за 1 день».",metricPartner:"Оффер РКО показывается в момент реальной потребности — на оплате",metricBank:"Заявки на расчётный счёт из живой базы юрлиц Рег.ру"},
+  {title:"Оффер и условия",zone:"Рег.ру → Банк",screen:"offer_consents",desc:"Условия счёта: бесплатное открытие и обслуживание, кэшбэк до 10% по бизнес-карте, до 3% на остаток. Согласие на обработку данных и передачу реквизитов компании в банк.",metricPartner:"Понятная выгода вместо абстрактного «откройте счёт»",metricBank:"Прозрачные условия снижают отказ на первом шаге"},
+  {title:"Только номер телефона",zone:"Альфа-Банк",screen:"identify",desc:"Вся заявка — одно поле: номер телефона. Никаких анкет, ИНН и сканов документов на этом шаге.",metricPartner:"Минимальный барьер: заявка занимает секунды",metricBank:"Короткая форма даёт максимальную конверсию в лид"},
+  {title:"Звонок менеджера",zone:"Альфа-Банк",screen:"form",desc:"Менеджер перезванивает, уточняет данные компании и согласует встречу для подписания. Документы готовит банк — клиенту ничего заполнять не нужно.",metricPartner:"Клиент не уходит с площадки ради оформления",metricBank:"Менеджер ведёт клиента до активного счёта"},
+  {title:"Счёт открыт, xWallet выпущен",zone:"Банк → Рег.ру",screen:"issued",desc:"После подписания счёт активен, а в кабинете Рег.ру появляется xWallet как способ оплаты — привязка происходит автоматически, без ввода реквизитов вручную.",metricPartner:"Новый способ оплаты без разработки биллинга",metricBank:"Счёт начинает работать сразу — с оборотом в первый же день"},
+  {title:"Пополнение с расчётного счёта",zone:"xWallet",screen:"topup_c2b",desc:"Клиент пополняет кошелёк с расчётного счёта — деньги зачисляются моментально, услуги активируются без ожидания межбанка.",metricPartner:"Услуга включается сразу — нет разрыва в 1–3 дня",metricBank:"Обороты и остатки остаются в банке"},
+  {title:"Оплата на чек-ауте",zone:"Рег.ру",screen:"b2b_checkout",desc:"На оплате заказа xWallet уже стоит в списке способов оплаты — привязался автоматически при выпуске. Видно баланс и хватает ли средств, счёт на оплату больше не нужен.",metricPartner:"Кошелёк занимает первую строку чек-аута вместо счёта на оплату",metricBank:"Каждая оплата услуг проходит через кошелёк и счёт в банке"}
+]},
+{id:"active",group:"journey",client:"existing",label:"Подключение кошелька",desc:"Счёт уже есть · подключение xWallet в два шага",steps:[
+  {title:"Узнаём клиента",zone:"Рег.ру",screen:"ga_checkout",desc:"У компании уже есть счёт в Альфа-Банке. На оплате предлагается подключить xWallet — без открытия нового счёта.",metricPartner:"Короткий путь для тёплого клиента",metricBank:"Дополнительный сценарий использования уже открытого счёта"},
+  {title:"Подключение счёта",zone:"Банк",screen:"bind",desc:"Клиент подтверждает подключение в интернет-банке. Реквизиты передаются в Рег.ру автоматически, вводить ничего не нужно.",metricPartner:"Подключение за два касания вместо анкеты",metricBank:"Подтверждение внутри доверенного канала банка"},
+  {title:"Выбор счёта",zone:"Банк",screen:"select_card",desc:"Если у компании несколько счетов или бизнес-карт, клиент выбирает, с чего списывать оплату услуг Рег.ру.",metricPartner:"Гибкость для холдингов и групп компаний",metricBank:"Клиент сам распределяет обороты между продуктами"},
+  {title:"xWallet подключён",zone:"Рег.ру",screen:"wallet_ready",desc:"Кошелёк готов: виден баланс, история операций и список оплаченных услуг. Оплата доступна в один клик.",metricPartner:"Оплата без ухода на сторонний платёжный шлюз",metricBank:"Регулярные списания закрепляют счёт как основной"},
+  {title:"Первая оплата",zone:"Рег.ру",screen:"pay_bonus",desc:"Продление домена оплачивается с xWallet. Кэшбэк возвращается на кошелёк и идёт в зачёт следующих услуг.",metricPartner:"Кэшбэк возвращается в оборот Рег.ру, а не выводится",metricBank:"Повышение частоты операций по счёту"}
+]},
+{id:"pay",group:"journey",client:"both",label:"Оплата услуг",desc:"Домен, хостинг, сервер · оплата в один клик",steps:[
+  {title:"Выбор услуги",zone:"Рег.ру",screen:"shop_product",desc:"Клиент подбирает домен и тариф хостинга. Рядом с ценой видно доступный баланс xWallet — понятно, хватает ли средств.",metricPartner:"Баланс на карточке услуги подталкивает к оплате сразу",metricBank:"Кошелёк присутствует в пути до корзины"},
+  {title:"Корзина",zone:"Рег.ру",screen:"cart",desc:"В заказе несколько позиций: домен, хостинг, SSL-сертификат. Общая сумма и остаток на кошельке пересчитываются на лету.",metricPartner:"Больше позиций в одном заказе",metricBank:"Растёт средний чек операции по счёту"},
+  {title:"Способ оплаты",zone:"Рег.ру",screen:"checkout_methods",desc:"Вместо выставления счёта и ожидания бухгалтерии — оплата с xWallet. Счёт на оплату и акт формируются автоматически.",metricPartner:"Убирается главный тормоз B2B-оплаты — согласование счёта",metricBank:"Платёж проходит внутри банка, без внешнего эквайринга"},
+  {title:"Подтверждение",zone:"xWallet",screen:"method_selected",desc:"Клиент подтверждает списание. Лимиты и права сотрудника проверяются автоматически.",metricPartner:"Меньше ошибочных оплат и спорных операций",metricBank:"Контроль расходов повышает доверие к продукту"},
+  {title:"Услуга активна",zone:"Рег.ру",screen:"paid",desc:"Домен продлён, хостинг оплачен — сразу, без ожидания проводки. Закрывающие документы появляются в кабинете.",metricPartner:"Ноль обращений в поддержку «когда включится услуга»",metricBank:"Подтверждённая операция в моменте"}
+]},
+{id:"auto",group:"journey",client:"both",label:"Автопродление",desc:"Продление списывается с баланса кошелька — без счетов и напоминаний",steps:[
+  {title:"Риск потерять домен",zone:"Рег.ру",screen:"gp_replenish",desc:"У компании десятки доменов с разными датами продления. Счёт на оплату согласуют неделю — домен успевает освободиться, сайт и почта падают.",metricPartner:"Автопродление напрямую снижает отток по доменам",metricBank:"Разовые платежи превращаются в регулярные"},
+  {title:"Баланс на кошельке",zone:"xWallet",screen:"gp_rep_setup",desc:"Компания держит на кошельке рабочий остаток на инфраструктуру. Пока баланс положительный, продление проходит само: Рег.ру списывает сумму с кошелька в день окончания услуги.",metricPartner:"Положительный баланс = гарантированное продление без переписки",metricBank:"Постоянный остаток на счёте компании"},
+  {title:"Продлилось само",zone:"Рег.ру",screen:"gp_rep_spend",desc:"Домены и хостинг продлены с баланса кошелька, бухгалтерия получает один закрывающий документ за период. Если остаток подходит к концу — кошелёк пополняется с расчётного счёта автоматически.",metricPartner:"Ноль ручных оплат и ноль потерянных доменов",metricBank:"Автопополнение с расчётного счёта — регулярный оборот"},
+]},
+{id:"manage",group:"journey",client:"both",label:"Управление и роли",desc:"Лимиты, сотрудники, доступы подрядчикам",steps:[
+  {title:"Кошелёк компании",zone:"xWallet",screen:"wallet_home",desc:"Баланс, расходы по услугам и статистика за период — руководитель видит, сколько уходит на инфраструктуру.",metricPartner:"Прозрачность расходов повышает лояльность к площадке",metricBank:"Данные о структуре расходов бизнеса"},
+  {title:"Пополнение",zone:"xWallet",screen:"wallet_topup",desc:"Пополнение с расчётного счёта разово или по расписанию — например, фиксированная сумма на инфраструктуру каждый месяц.",metricPartner:"Бюджет на услуги закладывается заранее",metricBank:"Планируемые обороты по счёту"},
+  {title:"Права сотрудников",zone:"xWallet",screen:"profile_access",desc:"Доступ выдаётся разработчику, агентству или подрядчику с лимитом. Сотрудник оплачивает услуги, но не видит расчётный счёт компании.",metricPartner:"Закрывается реальная боль агентств и веб-студий",metricBank:"Безопасное делегирование без выдачи доступа к банку"},
+  {title:"Операции и лимиты",zone:"xWallet",screen:"wallet_actions",desc:"Руководитель меняет лимиты, ставит операции на паузу и отзывает доступ в один клик.",metricPartner:"Контроль снимает страх передачи оплаты сотруднику",metricBank:"Управляемый риск по операциям"},
+  {title:"Документы",zone:"xWallet",screen:"wallet_requisites",desc:"Закрывающие документы, акты и УПД собираются в кабинете и выгружаются одним файлом для бухгалтерии.",metricPartner:"Меньше обращений за документами в поддержку",metricBank:"Полный документальный след по операциям"}
+]},
+{id:"credit",group:"journey",client:"both",label:"Оплата частями",desc:"Инфраструктура сейчас — оплата равными частями",steps:[
+  {title:"Крупная закупка",zone:"Рег.ру",screen:"inst_offer",desc:"Компании нужен выделенный сервер и лицензии на год. Сумма крупная, а бюджет квартала уже распределён.",metricPartner:"Дорогие тарифы становятся доступнее",metricBank:"Новый кредитный продукт для юрлиц"},
+  {title:"Выбор графика",zone:"Банк",screen:"inst_plan",desc:"Клиент выбирает срок — 3, 6 или 12 месяцев. Виден платёж в месяц и итоговая сумма.",metricPartner:"Рост среднего чека на инфраструктуру",metricBank:"Прозрачные условия без скрытых комиссий"},
+  {title:"Согласие",zone:"Банк",screen:"inst_consent",desc:"Условия и график подписываются в интернет-банке. Решение принимается онлайн, без визита в отделение.",metricPartner:"Сделка не срывается из-за бюджета",metricBank:"Скоринг на основе оборотов по счёту"},
+  {title:"Подтверждение",zone:"Банк",screen:"inst_confirm",desc:"Клиент подтверждает оплату частями. Рег.ру получает всю сумму сразу.",metricPartner:"Полная оплата на счёт площадки в моменте",metricBank:"Кредитный портфель с понятным обеспечением"},
+  {title:"Сервер работает",zone:"Рег.ру",screen:"inst_done",desc:"Сервер запущен, график платежей виден в кошельке. Списания проходят автоматически с расчётного счёта.",metricPartner:"Клиент переходит на более дорогой тариф",metricBank:"Регулярные платежи и удержание клиента"}
+]}
+];
+const benefitsClient=[
+  {icon:"sparkle",title:"Оплата без счёта и ожидания",desc:"Домен, хостинг и сервер оплачиваются в один клик — услуга включается сразу, а не через 1–3 дня",accent:"1 клик"},
+  {icon:"refresh",title:"Автопродление инфраструктуры",desc:"Автопополнение с расчётного счёта — домены и хостинг не слетают из-за пропущенной оплаты"},
+  {icon:"users",title:"Лимиты и доступы сотрудникам",desc:"Разработчик или агентство оплачивает услуги в рамках лимита, не видя расчётный счёт компании"},
+  {icon:"wallet",title:"Документы автоматически",desc:"Акты, счета и УПД собираются в кабинете и выгружаются одним файлом для бухгалтерии"},
+];
+const benefitsPartner=[
+  {icon:"trend",title:"Конверсия в оплату",desc:"Исчезает разрыв «выставили счёт — ждём бухгалтерию»: оплата проходит в моменте",accent:"конверсия"},
+  {icon:"refresh",title:"Меньше оттока",desc:"Автопродление удерживает домены и хостинг без усилий менеджера"},
+  {icon:"chart",title:"Средний чек и частота",desc:"Оплата частями открывает доступ к дорогим тарифам — серверам и лицензиям"},
+  {icon:"savings",title:"Экономия на эквайринге",desc:"Платёж проходит внутри банка, без комиссии внешнего платёжного шлюза"},
+];
+const benefitsBank=[
+  {icon:"users",title:"Новые РКО-клиенты",desc:"Заявки на расчётный счёт из активной базы юрлиц Рег.ру — в момент реальной потребности",accent:"РКО"},
+  {icon:"refresh",title:"Обороты по счетам",desc:"Регулярные платежи за инфраструктуру закрепляют счёт как основной"},
+  {icon:"savings",title:"Остатки на счетах",desc:"Бюджет на инфраструктуру хранится на кошельке и счёте компании"},
+  {icon:"chart",title:"Данные о расходах бизнеса",desc:"Структура затрат на ИТ — основа для скоринга и кредитных предложений"},
+];
+
+/* ===== ICONS ===== */
+const Ico=({d,size=22,stroke=1.6})=>(
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={stroke} strokeLinecap="round" strokeLinejoin="round">{d}</svg>
+);
+const ICONS={
+  savings:<><path d="M12 3v4M5 11h14M5 11v8a2 2 0 002 2h10a2 2 0 002-2v-8M5 11a4 4 0 014-4h6a4 4 0 014 4"/><circle cx="16" cy="15" r="1"/></>,
+  users:<><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0113 0M16 11a3 3 0 100-6M21.5 19a4.5 4.5 0 00-6-4.3"/></>,
+  chart:<><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></>,
+  refresh:<><path d="M3 12a9 9 0 0115.5-6.3L21 8M21 3v5h-5M21 12a9 9 0 01-15.5 6.3L3 16M3 21v-5h5"/></>,
+  gift:<><path d="M20 12v8H4v-8M2 8h20v4H2zM12 8v13M12 8s-4-5-7-3c-2 1.5-1 5 3 5h4zM12 8s4-5 7-3c2 1.5 1 5-3 5h-4z"/></>,
+  sparkle:<><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M6 18l2.5-2.5M15.5 8.5L18 6"/></>,
+  card:<><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19M6 15h4"/></>,
+  wallet:<><path d="M3 7a2 2 0 012-2h12a2 2 0 012 2M3 7v10a2 2 0 002 2h14a2 2 0 002-2v-6a2 2 0 00-2-2H5a2 2 0 01-2-2zM17 13h.01"/></>,
+  trend:<><path d="M3 17l6-6 4 4 8-8M14 7h7v7"/></>,
+  data:<><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></>,
+  arrow_r:<><path d="M5 12h14M13 5l7 7-7 7"/></>,
+  arrow_l:<><path d="M19 12H5M11 5l-7 7 7 7"/></>,
+  restart:<><path d="M3 12a9 9 0 109-9 9 9 0 00-7 3.5M3 3v4h4"/></>,
+};
+
+/* ===== HOOKS ===== */
+function useReveal(once=true, amount=0.2){
+  const ref = useRef(null);
+  const inView = useInView(ref, { once, amount });
+  return [ref, inView];
+}
+function useGlobalSpotlight(){
+  useEffect(()=>{
+    const el = document.getElementById('spotlight');
+    if(!el) return;
+    const onMove=(e)=>{ el.style.setProperty('--mx', e.clientX+'px'); el.style.setProperty('--my', e.clientY+'px'); };
+    window.addEventListener('mousemove', onMove);
+    return ()=>window.removeEventListener('mousemove', onMove);
+  },[]);
+}
+
+/* ===== PHONE PRIMITIVES ===== */
+const PRow = ({l,v,last,strong})=>(
+  <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"10px 0",borderBottom:last?"none":"1px solid var(--phone-line-1)",fontSize:12}}>
+    <span style={{color:"var(--phone-text-2)"}}>{l}</span>
+    <span className="num" style={{fontWeight:strong?700:600,color:"var(--phone-text-1)"}}>{v}</span>
+  </div>
+);
+const PBtn = (label,kind="dark")=>(
+  <div style={{
+    background: kind==="dark"?"var(--ink-1)":kind==="lime"?"var(--lime)":"#fff",
+    color: kind==="dark"?"#fff":"var(--ink-1)",
+    border: kind==="ghost"?"1px solid var(--phone-line-1)":"none",
+    borderRadius:11,padding:"12px 0",fontWeight:600,fontSize:13,textAlign:"center"
+  }}>{label}</div>
+);
+const Bonus = ({txt="Кэшбэк возвращается на кошелёк"})=>(
+  <div style={{background:"var(--lime)",borderRadius:11,padding:"11px 12px",display:"flex",alignItems:"center",gap:9}}>
+    <div style={{width:22,height:22,borderRadius:6,background:"#fff",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,fontSize:11,fontWeight:800,color:"var(--lime-deep)",letterSpacing:"-.02em"}}>x</div>
+    <div style={{fontSize:11.5,fontWeight:700,color:"#fff",lineHeight:1.25,letterSpacing:"-.01em"}}>{txt}</div>
+  </div>
+);
+const WalletCard = ({balance="0 ₽",num="•••• 4567",soft=false})=>(
+  <div style={{background:"linear-gradient(135deg, #35CB63, #17A247)",borderRadius:14,padding:"13px 14px",position:"relative",overflow:"hidden"}}>
+    
+    <div style={{fontSize:9,opacity:.7,textTransform:"uppercase",letterSpacing:".1em",color:"#fff",fontWeight:700}}>xWallet</div>
+    <div className="num" style={{fontSize:15,fontWeight:700,letterSpacing:"0.22em",marginTop:14,color:"#fff"}}>{num}</div>
+    <div className="num" style={{fontSize:11,marginTop:6,color:"#fff",opacity:.8,fontWeight:600}}>Баланс · {balance}</div>
+  </div>
+);
+const TickCircle = ()=>(
+  <div style={{width:46,height:46,background:"var(--lime)",borderRadius:"50%",margin:"0 auto 12px",display:"flex",alignItems:"center",justifyContent:"center"}}>
+    <svg width="20" height="20" viewBox="0 0 18 18" fill="none"><path d="M4 9l3.5 3.5L14 6" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+  </div>
+);
+const PTitle = ({t,s})=>(
+  <React.Fragment>
+    <div style={{fontSize:16,fontWeight:700,color:"var(--phone-text-1)",letterSpacing:"-.02em",lineHeight:1.2}}>{t}</div>
+    {s&&<div style={{fontSize:11,color:"var(--phone-text-2)",marginTop:4}}>{s}</div>}
+  </React.Fragment>
+);
+
+/* ===== SCREENS ===== */
+const SCREENS = {
+  ga_checkout:{title:"Чек-аут · Рег.ру", render:()=>(
+    <div style={{padding:"14px 16px",display:"flex",flexDirection:"column",gap:11}}>
+      <div style={{display:"flex",alignItems:"center",gap:8}}>
+        <div style={{width:22,height:22,borderRadius:6,background:"var(--lime)",display:"flex",alignItems:"center",justifyContent:"center"}}>
+          <span style={{color:"#fff",fontWeight:800,fontSize:11}}>x</span>
+        </div>
+        <span style={{fontSize:11,fontWeight:700,color:"var(--phone-text-1)",letterSpacing:".02em"}}>Рег.ру</span>
+      </div>
+      <div style={{border:"1px solid var(--phone-line-1)",borderRadius:12,padding:"11px 13px"}}>
+        <div style={{fontSize:10,color:"var(--phone-text-2)",textTransform:"uppercase",letterSpacing:".06em"}}>Ваш заказ</div>
+        <div style={{fontSize:11,color:"var(--phone-text-1)",marginTop:5,fontWeight:500}}>Хостинг «Бизнес» · 12 мес</div>
+        <div className="num" style={{fontSize:22,fontWeight:800,color:"var(--phone-text-1)",letterSpacing:"-.02em",marginTop:4}}>12 900 ₽</div>
+      </div>
+      <Bonus/>
+      <div style={{marginTop:2}}>{PBtn("Оформить заказ","dark")}</div>
+    </div>
+  )},
+  offer_consents:{title:"Оффер + согласия", render:()=>(
+    <div style={{padding:"15px 16px"}}>
+      <BrandLogo height={28}/>
+      <div style={{fontSize:17,fontWeight:700,color:"var(--phone-text-1)",letterSpacing:"-.02em",lineHeight:1.2,marginTop:11}}>Платите через xWallet</div>
+      <div style={{fontSize:11,color:"var(--phone-text-2)",marginTop:4,marginBottom:12}}>Подключите кошелёк и получайте кэшбэк за каждую оплату</div>
+      {["Скидка + кэшбэк за оплату","Бесплатно навсегда","Бонусы за каждую покупку"].map((t,i)=>(
+        <div key={i} style={{display:"flex",alignItems:"center",gap:10,padding:"8px 0",borderTop:i===0?"1px solid var(--phone-line-1)":"none",borderBottom:"1px solid var(--phone-line-1)",fontSize:12,color:"var(--phone-text-1)",fontWeight:500}}>
+          <span style={{width:16,height:16,borderRadius:"50%",background:"var(--lime)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>
+            <svg width="10" height="10" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-6" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          </span>{t}
+        </div>))}
+      <div style={{marginTop:13}}>{PBtn("Продолжить","dark")}</div>
+      <div style={{fontSize:8,color:"var(--phone-text-3)",marginTop:9,lineHeight:1.4}}>Нажимая «Продолжить», я даю согласие на передачу реквизитов и банковской тайны, подтверждаю Памятку ЭДС и СОПД</div>
+    </div>
+  )},
+  identify:{title:"Заявка на счёт", render:()=>(
+    <div style={{padding:16}}>
+      <PTitle t="Заявка на расчётный счёт" s="Оставьте номер — менеджер перезвонит"/>
+      <div style={{borderBottom:"1.5px solid var(--lime)",padding:"10px 0 8px",marginTop:16}}>
+        <div style={{fontSize:9,color:"var(--phone-text-2)",textTransform:"uppercase",letterSpacing:".06em"}}>Телефон</div>
+        <div className="num" style={{fontSize:19,fontWeight:600,color:"var(--phone-text-1)",letterSpacing:".02em",marginTop:3}}>+7 (999) 123-45-67<span style={{opacity:.35,marginLeft:2}}>|</span></div>
+      </div>
+      <div style={{fontSize:10.5,color:"var(--phone-text-2)",lineHeight:1.45,margin:"14px 0 14px"}}>
+        Больше ничего заполнять не нужно: данные компании менеджер уточнит по телефону и подготовит документы сам.
+      </div>
+      <div style={{display:"flex",gap:8,marginBottom:10}}>
+        <div style={{flex:1}}>{PBtn("Перезвонить мне","ghost")}</div>
+        <div style={{flex:1}}>{PBtn("Отправить","dark")}</div>
+      </div>
+      <div style={{fontSize:9,color:"var(--phone-text-3)",textAlign:"center",lineHeight:1.4}}>Нажимая кнопку, вы соглашаетесь с обработкой данных</div>
+    </div>
+  )},
+  form:{title:"Менеджер перезвонит", render:()=>(
+    <div style={{padding:16}}>
+      <PTitle t="Заявка принята" s="Менеджер свяжется в течение 15 минут"/>
+      <div style={{background:"var(--lime-soft)",borderRadius:12,padding:"14px 13px",margin:"14px 0 14px",display:"flex",alignItems:"center",gap:11}}>
+        <div style={{width:34,height:34,borderRadius:"50%",background:"var(--lime)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 3.8c0-.5.4-.8.8-.8h1.9c.4 0 .7.2.8.6l.6 2c.1.3 0 .7-.3.9l-1 .7a9 9 0 0 0 3 3l.7-1c.2-.3.6-.4.9-.3l2 .6c.4.1.6.4.6.8v1.9c0 .4-.3.8-.8.8A10.2 10.2 0 0 1 3 3.8Z" fill="#fff"/>
+          </svg>
+        </div>
+        <div>
+          <div style={{fontSize:12,fontWeight:700,color:"var(--phone-text-1)",letterSpacing:"-.01em"}}>Входящий звонок из банка</div>
+          <div className="num" style={{fontSize:10.5,color:"var(--phone-text-2)",marginTop:2}}>+7 (495) 788-88-78</div>
+        </div>
+      </div>
+      {[{t:"Уточнит данные компании",d:"ИНН, вид деятельности, тариф"},{t:"Подготовит документы",d:"Заполнять ничего не нужно"},{t:"Согласует встречу",d:"Менеджер приедет, куда удобно"}].map((s,i)=>(
+        <div key={i} style={{display:"flex",gap:9,alignItems:"flex-start",padding:"7px 0",borderBottom:i<2?"1px solid var(--phone-line-1)":"none"}}>
+          <div style={{width:17,height:17,borderRadius:"50%",border:"1.4px solid var(--lime)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,marginTop:1,fontSize:9,fontWeight:700,color:"var(--lime-deep)"}}>{i+1}</div>
+          <div>
+            <div style={{fontSize:11.5,fontWeight:600,color:"var(--phone-text-1)",lineHeight:1.25}}>{s.t}</div>
+            <div style={{fontSize:10,color:"var(--phone-text-2)",marginTop:1}}>{s.d}</div>
+          </div>
+        </div>))}
+    </div>
+  )},
+  issued:{title:"Кошелёк выпущен", render:()=>(
+    <div style={{padding:16,textAlign:"center"}}>
+      <TickCircle/>
+      <div style={{fontSize:16,fontWeight:700,color:"var(--phone-text-1)",letterSpacing:"-.02em"}}>xWallet выпущен</div>
+      <div style={{fontSize:11,color:"var(--phone-text-2)",margin:"6px 0 13px",lineHeight:1.4}}>Пополните кошелёк и оплачивайте покупки с кэшбэком</div>
+      <div style={{marginBottom:13,textAlign:"left"}}><WalletCard balance="0 ₽"/></div>
+      <div style={{display:"flex",gap:8}}>
+        <div style={{flex:1}}>{PBtn("Пополнить","dark")}</div>
+        <div style={{flex:1}}>{PBtn("Оплатить","lime")}</div>
+      </div>
+    </div>
+  )},
+  topup_c2b:{title:"Пополнение кошелька", render:()=>(
+    <div style={{padding:16}}>
+      <PTitle t="Пополнение кошелька" s="С карты другого банка"/>
+      <div style={{marginTop:12,marginBottom:12}}><WalletCard balance="0 ₽" soft={true}/></div>
+      {[{l:"Сумма",v:"12 900 ₽"},{l:"Комиссия",v:"0 ₽"},{l:"Откуда",v:"Т-Банк ····8901"},{l:"Куда",v:"xWallet ····4567",last:true}].map((r,i)=>(<PRow key={i} {...r}/>))}
+      <div style={{marginTop:14}}>{PBtn("Пополнить и оплатить","dark")}</div>
+    </div>
+  )},
+  bind:{title:"Привязка к xWallet", render:()=>(
+    <div style={{padding:16}}>
+      <PTitle t="Способ оплаты" s="xWallet привязан автоматически"/>
+      <div style={{marginTop:12}}>
+        {[{n:"xWallet",sel:true,tag:"ga"},{n:"СБП",sel:false},{n:"SberPay",sel:false},{n:"Яндекс Пэй",sel:false}].map((m,i)=>(
+          <div key={i} style={{display:"flex",alignItems:"center",gap:10,padding:"11px 12px",borderRadius:11,marginBottom:7,border:m.sel?"1.5px solid var(--ink-1)":"1px solid var(--phone-line-1)",background:m.sel?"var(--phone-surf)":"#fff"}}>
+            {m.tag==="ga"?<div style={{width:22,height:22,borderRadius:6,background:"var(--lime)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,fontSize:11,fontWeight:800,color:"#fff"}}>x</div>:<div style={{width:22,height:22,borderRadius:6,background:"var(--phone-surf)",border:"1px solid var(--phone-line-1)"}}/>}
+            <span style={{flex:1,fontSize:13,fontWeight:m.sel?700:500,color:"var(--phone-text-1)"}}>{m.n}</span>
+            <span style={{width:16,height:16,borderRadius:"50%",border:"1.5px solid "+(m.sel?"var(--ink-1)":"var(--phone-line-1)"),display:"flex",alignItems:"center",justifyContent:"center"}}>
+              {m.sel&&<span style={{width:8,height:8,borderRadius:"50%",background:"var(--ink-1)"}}/>}</span>
+          </div>))}
+      </div>
+      <div style={{marginTop:6}}>{PBtn("Продолжить","dark")}</div>
+    </div>
+  )},
+  pay_bonus:{title:"Оплата на чек-ауте", render:()=>(
+    <div style={{padding:16,textAlign:"center"}}>
+      <TickCircle/>
+      <div style={{fontSize:16,fontWeight:700,color:"var(--phone-text-1)",letterSpacing:"-.02em"}}>Заказ оплачен</div>
+      <div style={{fontSize:11,color:"var(--phone-text-2)",margin:"6px 0 13px"}}>Оплата прошла через xWallet</div>
+      <div style={{textAlign:"left",borderTop:"1px solid var(--phone-line-1)",paddingTop:8}}>
+        <PRow l="Сумма заказа" v="12 900 ₽"/>
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"10px 0",borderBottom:"1px solid var(--phone-line-1)"}}>
+          <span style={{fontSize:12,color:"var(--phone-text-1)",fontWeight:600}}>Начислено кэшбэка</span>
+          <span className="num" style={{background:"var(--lime)",borderRadius:8,padding:"3px 9px",fontSize:12,fontWeight:800,color:"#fff"}}>+387 ₽</span>
+        </div>
+        <div style={{display:"flex",justifyContent:"space-between",padding:"11px 0 0",alignItems:"baseline"}}>
+          <span style={{fontSize:12,fontWeight:600,color:"var(--phone-text-1)"}}>Оплачено</span>
+          <span className="num" style={{fontSize:22,fontWeight:800,color:"var(--phone-text-1)",letterSpacing:"-.02em"}}>12 900 ₽</span>
+        </div>
+      </div>
+    </div>
+  )},
+  select_card:{title:"Выбор карты", render:()=>(
+    <div style={{padding:16}}>
+      <PTitle t="Выберите карту в кошельке" s="Или выпустите новую"/>
+      <div style={{marginTop:12}}>
+        {[{n:"Карта Альфа-Банка",num:"····4567",bal:"149 000 ₽",sel:true},{n:"Карта Альфа-Банка",num:"····3456",bal:"3 600 ₽",sel:false}].map((c,i)=>(
+          <div key={i} style={{background:c.sel?"var(--phone-surf)":"#fff",border:c.sel?"1.5px solid var(--ink-1)":"1px solid var(--phone-line-1)",borderRadius:11,padding:"10px 12px",marginBottom:8,display:"flex",alignItems:"center",gap:10}}>
+            <div style={{width:34,height:24,background:"var(--ink-1)",borderRadius:4,display:"flex",alignItems:"center",justifyContent:"center"}}>
+              <div style={{width:9,height:9,borderRadius:2,background:"var(--lime)"}}/></div>
+            <div style={{flex:1}}>
+              <div style={{fontSize:12,fontWeight:600,color:"var(--phone-text-1)"}}>{c.n}</div>
+              <div className="num" style={{fontSize:10,color:"var(--phone-text-2)"}}>{c.num} · {c.bal}</div>
+            </div>
+            <span style={{width:16,height:16,borderRadius:"50%",border:"1.5px solid "+(c.sel?"var(--ink-1)":"var(--phone-line-1)"),display:"flex",alignItems:"center",justifyContent:"center"}}>
+              {c.sel&&<span style={{width:8,height:8,borderRadius:"50%",background:"var(--ink-1)"}}/>}</span>
+          </div>))}
+        <div style={{display:"flex",alignItems:"center",gap:10,padding:"10px 12px",borderRadius:11,border:"1px dashed var(--line-3)"}}>
+          <div style={{width:34,height:24,borderRadius:4,border:"1px dashed var(--line-3)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:16,color:"var(--phone-text-2)",fontWeight:300}}>+</div>
+          <span style={{flex:1,fontSize:12,fontWeight:600,color:"var(--phone-text-1)"}}>Выпустить новую карту</span>
+        </div>
+      </div>
+      <div style={{marginTop:12}}>{PBtn("К оплате","dark")}</div>
+    </div>
+  )},
+  wallet_ready:{title:"Кошелёк подключён", render:()=>(
+    <div style={{padding:16,textAlign:"center"}}>
+      <TickCircle/>
+      <div style={{fontSize:16,fontWeight:700,color:"var(--phone-text-1)",letterSpacing:"-.02em"}}>xWallet подключён</div>
+      <div style={{fontSize:11,color:"var(--phone-text-2)",margin:"6px 0 13px",lineHeight:1.4}}>Кошелёк привязан к выбранной карте Альфа-Банка</div>
+      <div style={{textAlign:"left"}}><WalletCard balance="149 000 ₽"/></div>
+      <div style={{marginTop:13}}>{PBtn("Перейти к оплате","dark")}</div>
+    </div>
+  )},
+  shop_product:{title:"Витрина · Рег.ру", render:()=>(
+    <div style={{padding:"14px 16px"}}>
+      <div style={{height:150,borderRadius:14,background:"linear-gradient(135deg,var(--surface-2),var(--surface-1))",display:"flex",alignItems:"center",justifyContent:"center",marginBottom:12,position:"relative",overflow:"hidden"}}>
+        <div style={{position:"absolute",top:10,left:10,background:"var(--lime)",borderRadius:7,padding:"3px 9px",fontSize:9,fontWeight:800,color:"var(--ink-1)",letterSpacing:".02em"}}>ХИТ</div>
+        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="var(--ink-3)" strokeWidth="1.3"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.4"/><path d="M6.5 8.5l2 1M17.5 8.5l-2 1M6.5 15.5l2-1M17.5 15.5l-2-1"/></svg>
+      </div>
+      <div style={{fontSize:10,color:"var(--phone-text-2)",fontWeight:600,textTransform:"uppercase",letterSpacing:".06em"}}>Домены · Продление</div>
+      <div style={{fontSize:15,fontWeight:700,color:"var(--phone-text-1)",letterSpacing:"-.02em",margin:"3px 0 8px",lineHeight:1.25}}>Сервер VDS-8 · 12 мес</div>
+      <div style={{display:"flex",alignItems:"baseline",gap:8,marginBottom:10}}>
+        <span className="num" style={{fontSize:22,fontWeight:800,color:"var(--phone-text-1)",letterSpacing:"-.02em"}}>12 900 ₽</span>
+        <span style={{fontSize:11,color:"var(--phone-text-3)"}}>в наличии</span>
+      </div>
+      <div style={{marginBottom:12}}><Bonus txt="Скидка + кэшбэк при оплате через xWallet"/></div>
+      {PBtn("В корзину","dark")}
+    </div>
+  )},
+  cart:{title:"Корзина", render:()=>(
+    <div style={{padding:16}}>
+      <PTitle t="Корзина" s="1 товар · Рег.ру"/>
+      <div style={{display:"flex",gap:11,padding:"12px 0",borderBottom:"1px solid var(--phone-line-1)",marginTop:8}}>
+        <div style={{width:46,height:46,borderRadius:10,background:"var(--surface-2)",flexShrink:0}}/>
+        <div style={{flex:1}}>
+          <div style={{fontSize:12,fontWeight:600,color:"var(--phone-text-1)",lineHeight:1.3}}>Сервер VDS-8 · 12 мес</div>
+          <div style={{fontSize:10,color:"var(--phone-text-2)",marginTop:2}}>1 шт.</div>
+        </div>
+        <div className="num" style={{fontSize:13,fontWeight:700,color:"var(--phone-text-1)"}}>12 900 ₽</div>
+      </div>
+      <div style={{marginTop:6}}>
+        <PRow l="Товары" v="12 900 ₽"/>
+        <PRow l="Активация" v="бесплатно"/>
+        <PRow l="К оплате" v="12 900 ₽" last={true} strong={true}/>
+      </div>
+      <div style={{margin:"12px 0"}}><Bonus/></div>
+      {PBtn("Перейти к оплате","dark")}
+    </div>
+  )},
+  b2b_checkout:{title:"Чек-аут Рег.ру", render:()=>(
+    <div style={{padding:16}}>
+      <PTitle t="Оплата заказа" s="Кошелёк уже привязан как способ оплаты"/>
+      <div style={{background:"var(--phone-surf)",borderRadius:11,padding:"10px 12px",margin:"12px 0 10px"}}>
+        {[{n:"Домен romashka.ru",p:"199 ₽"},{n:"Хостинг «Бизнес» · 12 мес",p:"11 400 ₽"},{n:"SSL-сертификат",p:"1 301 ₽"}].map((r,i)=>(
+          <div key={i} style={{display:"flex",justifyContent:"space-between",gap:8,padding:"4px 0"}}>
+            <span style={{fontSize:10.5,color:"var(--phone-text-2)",lineHeight:1.3}}>{r.n}</span>
+            <span className="num" style={{fontSize:10.5,fontWeight:600,color:"var(--phone-text-1)",whiteSpace:"nowrap"}}>{r.p}</span>
+          </div>))}
+        <div style={{display:"flex",justifyContent:"space-between",borderTop:"1px solid var(--phone-line-1)",marginTop:6,paddingTop:7}}>
+          <span style={{fontSize:11.5,fontWeight:700,color:"var(--phone-text-1)"}}>Итого</span>
+          <span className="num" style={{fontSize:13,fontWeight:800,color:"var(--phone-text-1)"}}>12 900 ₽</span>
+        </div>
+      </div>
+      <div style={{fontSize:9,color:"var(--phone-text-2)",textTransform:"uppercase",letterSpacing:".06em",marginBottom:7}}>Способ оплаты</div>
+      <div style={{display:"flex",alignItems:"center",gap:10,padding:"11px 12px",borderRadius:12,border:"1.5px solid var(--lime)",background:"var(--lime-soft)",marginBottom:7}}>
+        <div style={{width:28,height:28,borderRadius:8,background:"var(--ink-1)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,fontSize:13,fontWeight:800,color:"var(--lime)"}}>x</div>
+        <div style={{flex:1,minWidth:0}}>
+          <div style={{fontSize:12.5,fontWeight:700,color:"var(--phone-text-1)"}}>xWallet B2B</div>
+          <div className="num" style={{fontSize:10,color:"var(--phone-text-2)"}}>Баланс 96 000 ₽ · хватает</div>
+        </div>
+        <span style={{fontSize:8.5,fontWeight:700,color:"var(--lime-deep)",background:"#fff",borderRadius:5,padding:"3px 6px",whiteSpace:"nowrap"}}>привязан</span>
+      </div>
+      {[{n:"Счёт на оплату",d:"придёт на почту, зачисление 1–3 дня"},{n:"Картой онлайн",d:"Visa · Mastercard · Мир"}].map((o,i)=>(
+        <div key={i} style={{display:"flex",alignItems:"center",gap:10,padding:"9px 12px",borderRadius:11,border:"1px solid var(--phone-line-1)",marginBottom:6,opacity:.72}}>
+          <div style={{width:24,height:24,borderRadius:7,background:"var(--surface-2)",flexShrink:0}}/>
+          <div style={{flex:1,minWidth:0}}>
+            <div style={{fontSize:11.5,fontWeight:600,color:"var(--phone-text-1)"}}>{o.n}</div>
+            <div style={{fontSize:9.5,color:"var(--phone-text-2)"}}>{o.d}</div>
+          </div>
+        </div>))}
+      <div style={{marginTop:9}}>{PBtn("Оплатить 12 900 ₽","dark")}</div>
+    </div>
+  )},
+  checkout_methods:{title:"Способ оплаты", render:()=>(
+    <div style={{padding:16}}>
+      <PTitle t="Способ оплаты" s="К оплате 12 900 ₽"/>
+      <div style={{marginTop:12}}>
+        {[{n:"xWallet",d:"кэшбэк 3% · баланс 96 000 ₽",sel:true,mark:true},{n:"Картой онлайн",d:"Visa · Mastercard · Мир",sel:false},{n:"СБП",d:"по QR-коду",sel:false}].map((o,i)=>(
+          <div key={i} style={{display:"flex",alignItems:"center",gap:11,padding:"12px",borderRadius:12,marginBottom:8,border:o.sel?"1.5px solid var(--ink-1)":"1px solid var(--phone-line-1)",background:o.sel?"var(--phone-surf)":"#fff"}}>
+            {o.mark?<div style={{width:26,height:26,borderRadius:7,background:"var(--lime)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,fontSize:13,fontWeight:800,color:"#fff"}}>x</div>:<div style={{width:26,height:26,borderRadius:7,background:"var(--surface-2)"}}/>}
+            <div style={{flex:1}}>
+              <div style={{fontSize:13,fontWeight:o.sel?700:600,color:"var(--phone-text-1)"}}>{o.n}</div>
+              <div style={{fontSize:10,color:o.mark?"var(--ink-1)":"var(--phone-text-2)",fontWeight:o.mark?600:400}}>{o.d}</div>
+            </div>
+            <span style={{width:18,height:18,borderRadius:"50%",border:"1.5px solid "+(o.sel?"var(--ink-1)":"var(--phone-line-1)"),display:"flex",alignItems:"center",justifyContent:"center"}}>
+              {o.sel&&<span style={{width:9,height:9,borderRadius:"50%",background:"var(--ink-1)"}}/>}</span>
+          </div>))}
+      </div>
+      <div style={{marginTop:6}}>{PBtn("Оплатить xWallet","dark")}</div>
+    </div>
+  )},
+  method_selected:{title:"Подтверждение оплаты", render:()=>(
+    <div style={{padding:16}}>
+      <PTitle t="Оплата кошельком" s="xWallet ····4567"/>
+      <div style={{margin:"12px 0"}}><WalletCard balance="96 000 ₽"/></div>
+      <PRow l="К оплате" v="12 900 ₽"/>
+      <PRow l="Спишется с кошелька" v="12 900 ₽"/>
+      <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"10px 0",borderBottom:"none"}}>
+        <span style={{fontSize:12,color:"var(--phone-text-1)",fontWeight:600}}>Кэшбэк на кошелёк</span>
+        <span className="num" style={{background:"var(--lime)",borderRadius:8,padding:"3px 9px",fontSize:12,fontWeight:800,color:"#fff"}}>+387 ₽</span>
+      </div>
+      <div style={{marginTop:12}}>{PBtn("Подтвердить оплату","dark")}</div>
+    </div>
+  )},
+  paid:{title:"Оплачено", render:()=>(
+    <div style={{padding:16,textAlign:"center"}}>
+      <TickCircle/>
+      <div style={{fontSize:16,fontWeight:700,color:"var(--phone-text-1)",letterSpacing:"-.02em"}}>Оплачено</div>
+      <div style={{fontSize:11,color:"var(--phone-text-2)",margin:"6px 0 13px"}}>Оплата прошла через xWallet</div>
+      <div style={{textAlign:"left",borderTop:"1px solid var(--phone-line-1)",paddingTop:8}}>
+        <PRow l="Сумма заказа" v="12 900 ₽"/>
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"10px 0",borderBottom:"1px solid var(--phone-line-1)"}}>
+          <span style={{fontSize:12,color:"var(--phone-text-1)",fontWeight:600}}>Начислено кэшбэка</span>
+          <span className="num" style={{background:"var(--lime)",borderRadius:8,padding:"3px 9px",fontSize:12,fontWeight:800,color:"#fff"}}>+387 ₽</span>
+        </div>
+        <div style={{display:"flex",justifyContent:"space-between",padding:"11px 0 0",alignItems:"baseline"}}>
+          <span style={{fontSize:12,fontWeight:600,color:"var(--phone-text-1)"}}>Остаток в кошельке</span>
+          <span className="num" style={{fontSize:18,fontWeight:800,color:"var(--phone-text-1)",letterSpacing:"-.02em"}}>8 300 ₽</span>
+        </div>
+      </div>
+    </div>
+  )},
+  profile_access:{title:"Профиль · Рег.ру", render:()=>(
+    <div style={{padding:16}}>
+      <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:14}}>
+        <div style={{width:48,height:48,borderRadius:"50%",background:"var(--ink-1)",color:"#fff",display:"flex",alignItems:"center",justifyContent:"center",fontWeight:700,fontSize:16}}>ЕМ</div>
+        <div>
+          <div style={{fontSize:15,fontWeight:700,color:"var(--phone-text-1)"}}>Елена Морозова</div>
+          <div style={{fontSize:11,color:"var(--phone-text-2)"}}>+7 ••• ••• 45 67</div>
+        </div>
+      </div>
+      <div style={{display:"flex",gap:9,marginBottom:14}}>
+        <div style={{flex:1,background:"var(--lime)",borderRadius:13,padding:"12px"}}>
+          <div className="num" style={{fontSize:20,fontWeight:800,color:"var(--ink-1)",letterSpacing:"-.02em"}}>981</div>
+          <div style={{fontSize:10,fontWeight:600,color:"var(--ink-1)",opacity:.7}}>кэшбэка</div>
+        </div>
+        <div style={{flex:1,background:"var(--phone-surf)",borderRadius:13,padding:"12px"}}>
+          <div className="num" style={{fontSize:20,fontWeight:800,color:"var(--phone-text-1)",letterSpacing:"-.02em"}}>4</div>
+          <div style={{fontSize:10,fontWeight:600,color:"var(--phone-text-2)"}}>заказов в месяц</div>
+        </div>
+      </div>
+      <div style={{display:"flex",alignItems:"center",gap:11,padding:"13px 13px",borderRadius:13,border:"1px solid var(--phone-line-1)"}}>
+        <div style={{width:30,height:30,borderRadius:8,background:"var(--lime)",display:"flex",alignItems:"center",justifyContent:"center"}}>
+          <div style={{fontSize:13,fontWeight:800,color:"#fff",letterSpacing:"-.02em"}}>x</div>
+        </div>
+        <div style={{flex:1}}>
+          <div style={{fontSize:13,fontWeight:700,color:"var(--phone-text-1)"}}>xWallet</div>
+          <div style={{fontSize:10,color:"var(--phone-text-2)"}}>Открыть и управлять</div>
+        </div>
+        <span style={{color:"var(--phone-text-3)"}}><Ico d={ICONS.arrow_r} size={18}/></span>
+      </div>
+    </div>
+  )},
+  wallet_home:{title:"xWallet", render:()=>(
+    <div style={{padding:16}}>
+      <WalletCard balance="96 000 ₽"/>
+      <div style={{display:"flex",gap:8,margin:"13px 0"}}>
+        {[{l:"Пополнить",i:"savings"},{l:"Перевести",i:"refresh"},{l:"Действия",i:"wallet"}].map((a,i)=>(
+          <div key={i} style={{flex:1,background:"var(--phone-surf)",borderRadius:12,padding:"11px 6px",textAlign:"center"}}>
+            <div style={{display:"flex",justifyContent:"center",color:"var(--ink-1)",marginBottom:5}}><Ico d={ICONS[a.i]} size={19}/></div>
+            <div style={{fontSize:10.5,fontWeight:600,color:"var(--phone-text-1)"}}>{a.l}</div>
+          </div>))}
+      </div>
+      <div style={{fontSize:11,fontWeight:700,color:"var(--phone-text-2)",textTransform:"uppercase",letterSpacing:".05em",margin:"4px 0 4px"}}>История</div>
+      {[{n:"Рег.ру",d:"Оплата покупки",v:"−12 900 ₽",b:false},{n:"Пополнение",d:"со счёта в Альфа-Банке",v:"+24 900 ₽",b:true},{n:"Кэшбэк",d:"начислено за оплату",v:"+387 ₽",b:false,bon:true}].map((t,i)=>(
+        <div key={i} style={{display:"flex",alignItems:"center",gap:10,padding:"10px 0",borderBottom:i<2?"1px solid var(--phone-line-1)":"none"}}>
+          <div style={{width:30,height:30,borderRadius:9,background:t.bon?"var(--lime)":"var(--surface-2)",flexShrink:0}}/>
+          <div style={{flex:1}}>
+            <div style={{fontSize:12,fontWeight:600,color:"var(--phone-text-1)"}}>{t.n}</div>
+            <div style={{fontSize:10,color:"var(--phone-text-2)"}}>{t.d}</div>
+          </div>
+          <div className="num" style={{fontSize:12,fontWeight:700,color:t.b?"var(--ink-1)":t.bon?"var(--ink-1)":"var(--phone-text-1)"}}>{t.v}</div>
+        </div>))}
+    </div>
+  )},
+  wallet_topup:{title:"Пополнение кошелька", render:()=>(
+    <div style={{padding:16}}>
+      <PTitle t="Пополнить кошелёк" s="xWallet ····4567"/>
+      <div style={{marginTop:12}}>
+        {[{n:"Со счёта в другом банке",d:"по СБП · мгновенно",mark:false},{n:"Со счёта в Альфа-Банке",d:"между своими · me2me",mark:true},{n:"Автопополнение",d:"при балансе ниже порога",mark:false}].map((o,i)=>(
+          <div key={i} style={{display:"flex",alignItems:"center",gap:11,padding:"12px",borderRadius:12,marginBottom:8,border:o.mark?"1.5px solid var(--ink-1)":"1px solid var(--phone-line-1)",background:o.mark?"var(--phone-surf)":"#fff"}}>
+            <div style={{width:30,height:30,borderRadius:8,background:o.mark?"var(--lime)":"var(--surface-2)",display:"flex",alignItems:"center",justifyContent:"center",color:"var(--ink-1)"}}>
+              <Ico d={ICONS[o.mark?"refresh":"savings"]} size={17}/>
+            </div>
+            <div style={{flex:1}}>
+              <div style={{fontSize:13,fontWeight:o.mark?700:600,color:"var(--phone-text-1)"}}>{o.n}</div>
+              <div style={{fontSize:10,color:"var(--phone-text-2)"}}>{o.d}</div>
+            </div>
+            <span style={{color:"var(--phone-text-3)"}}><Ico d={ICONS.arrow_r} size={16}/></span>
+          </div>))}
+      </div>
+      <div style={{fontSize:9,color:"var(--phone-text-3)",marginTop:4}}>Лимит пополнения по СБП — 149 000 ₽ за операцию</div>
+    </div>
+  )},
+  wallet_actions:{title:"Действия с кошельком", render:()=>(
+    <div style={{padding:16}}>
+      <PTitle t="Действия" s="Управление кошельком xWallet"/>
+      <div style={{marginTop:10}}>
+        {[{n:"Реквизиты кошелька",i:"card"},{n:"Изменить ПИН-код",i:"refresh"},{n:"Автопополнение",i:"savings"},{n:"Заморозить кошелёк",i:"wallet"},{n:"Тарифы и условия",i:"data"},{n:"Закрыть кошелёк",i:"arrow_r",danger:true}].map((a,i)=>(
+          <div key={i} style={{display:"flex",alignItems:"center",gap:11,padding:"13px 2px",borderBottom:i<5?"1px solid var(--phone-line-1)":"none"}}>
+            <div style={{width:30,height:30,borderRadius:8,background:"var(--phone-surf)",display:"flex",alignItems:"center",justifyContent:"center",color:a.danger?"#C0392B":"var(--ink-1)"}}>
+              <Ico d={ICONS[a.i]} size={17}/>
+            </div>
+            <div style={{flex:1,fontSize:13,fontWeight:600,color:a.danger?"#C0392B":"var(--phone-text-1)"}}>{a.n}</div>
+            {!a.danger&&<span style={{color:"var(--phone-text-3)"}}><Ico d={ICONS.arrow_r} size={16}/></span>}
+          </div>))}
+      </div>
+    </div>
+  )},
+  wallet_requisites:{title:"Реквизиты кошелька", render:()=>(
+    <div style={{padding:16}}>
+      <PTitle t="Реквизиты" s="Виртуальная карта xWallet"/>
+      <div style={{margin:"12px 0"}}><WalletCard balance="96 000 ₽" num="4790 •••• •••• 4567"/></div>
+      {[{l:"Номер карты",v:"4790 12•• •••• 4567",copy:true},{l:"Срок действия",v:"08 / 29"},{l:"CVC",v:"•••",eye:true}].map((r,i)=>(
+        <div key={i} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"11px 0",borderBottom:i<2?"1px solid var(--phone-line-1)":"none"}}>
+          <span style={{fontSize:12,color:"var(--phone-text-2)"}}>{r.l}</span>
+          <span style={{display:"flex",alignItems:"center",gap:8}}>
+            <span className="num" style={{fontSize:12.5,fontWeight:600,color:"var(--phone-text-1)"}}>{r.v}</span>
+            {r.copy&&<span style={{color:"var(--phone-text-3)"}}><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg></span>}
+            {r.eye&&<span style={{color:"var(--phone-text-3)"}}><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="2.5"/></svg></span>}
+          </span>
+        </div>))}
+      <div style={{marginTop:14}}>{PBtn("Скопировать реквизиты","ghost")}</div>
+    </div>
+  )},
+  inst_offer:{title:"Оплата частями", render:()=>(
+    <div style={{padding:16}}>
+      <PTitle t="Способ оплаты" s="К оплате 12 900 ₽"/>
+      <div style={{marginTop:12}}>
+        {[{n:"Оплата частями",d:"xWallet · 4 платежа без переплаты",sel:true,mark:true},{n:"Полная оплата кошельком",d:"12 900 ₽ сразу",sel:false}].map((o,i)=>(
+          <div key={i} style={{display:"flex",alignItems:"center",gap:11,padding:"12px",borderRadius:12,marginBottom:8,border:o.sel?"1.5px solid var(--ink-1)":"1px solid var(--phone-line-1)",background:o.sel?"var(--phone-surf)":"#fff"}}>
+            {o.mark?<div style={{width:26,height:26,borderRadius:7,background:"var(--lime)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,fontSize:13,fontWeight:800,color:"#fff"}}>x</div>:<div style={{width:26,height:26,borderRadius:7,background:"var(--surface-2)"}}/>}
+            <div style={{flex:1}}>
+              <div style={{fontSize:13,fontWeight:o.sel?700:600,color:"var(--phone-text-1)"}}>{o.n}</div>
+              <div style={{fontSize:10,color:o.mark?"var(--ink-1)":"var(--phone-text-2)",fontWeight:o.mark?600:400}}>{o.d}</div>
+            </div>
+            <span style={{width:18,height:18,borderRadius:"50%",border:"1.5px solid "+(o.sel?"var(--ink-1)":"var(--phone-line-1)"),display:"flex",alignItems:"center",justifyContent:"center"}}>
+              {o.sel&&<span style={{width:9,height:9,borderRadius:"50%",background:"var(--ink-1)"}}/>}</span>
+          </div>))}
+      </div>
+      <div style={{marginTop:6}}>{PBtn("Оформить оплату частями","dark")}</div>
+    </div>
+  )},
+  inst_plan:{title:"График платежей", render:()=>(
+    <div style={{padding:16}}>
+      <PTitle t="Оплата частями" s="12 900 ₽ · 4 платежа раз в 2 недели"/>
+      <div style={{display:"flex",gap:6,margin:"13px 0"}}>
+        {[1,2,3,4].map((n,i)=>(
+          <div key={i} style={{flex:1,height:5,borderRadius:3,background:i===0?"var(--lime)":"var(--surface-2)"}}/>
+        ))}
+      </div>
+      {[{d:"Сегодня",v:"7 900 ₽",now:true},{d:"Через 2 недели",v:"7 900 ₽"},{d:"Через 4 недели",v:"7 900 ₽"},{d:"Через 6 недель",v:"7 900 ₽"}].map((p,i)=>(
+        <div key={i} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"11px 0",borderBottom:i<3?"1px solid var(--phone-line-1)":"none"}}>
+          <span style={{display:"flex",alignItems:"center",gap:9}}>
+            <span style={{width:8,height:8,borderRadius:"50%",background:p.now?"var(--lime-deep)":"var(--phone-line-1)"}}/>
+            <span style={{fontSize:12,fontWeight:p.now?700:500,color:"var(--phone-text-1)"}}>{p.d}</span>
+          </span>
+          <span className="num" style={{fontSize:13,fontWeight:p.now?800:600,color:"var(--phone-text-1)"}}>{p.v}</span>
+        </div>))}
+      <div style={{fontSize:10,color:"var(--phone-text-3)",margin:"10px 0 12px"}}>Без процентов и переплаты · комиссия 0 ₽</div>
+      {PBtn("Продолжить","dark")}
+    </div>
+  )},
+  inst_consent:{title:"Согласия", render:()=>(
+    <div style={{padding:16}}>
+      <PTitle t="Подтверждение условий" s="Оплата частями · xWallet"/>
+      <div style={{marginTop:12,display:"flex",flexDirection:"column",gap:10}}>
+        {["Согласие на оплату частями и график платежей","Согласие на обработку персональных данных (СОПД)","Подписание простой электронной подписью (ЭДС)"].map((t,i)=>(
+          <div key={i} style={{display:"flex",gap:10,alignItems:"flex-start"}}>
+            <span style={{width:18,height:18,borderRadius:5,background:"var(--lime)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,marginTop:1}}>
+              <svg width="11" height="11" viewBox="0 0 18 18" fill="none"><path d="M4 9l3.5 3.5L14 6" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            </span>
+            <span style={{fontSize:11.5,color:"var(--phone-text-1)",lineHeight:1.4}}>{t}</span>
+          </div>))}
+      </div>
+      <div style={{margin:"14px 0 12px",padding:"10px 12px",background:"var(--phone-surf)",borderRadius:11,fontSize:10.5,color:"var(--phone-text-2)",lineHeight:1.45}}>Оплату частями предоставляет Альфа-Банк. Условия — в графике платежей.</div>
+      {PBtn("Подтвердить кодом из СМС","dark")}
+    </div>
+  )},
+  inst_confirm:{title:"Первый платёж", render:()=>(
+    <div style={{padding:16}}>
+      <PTitle t="Первый платёж" s="Оплата частями · 4 платежа"/>
+      <div style={{margin:"13px 0",textAlign:"center",padding:"16px 12px",background:"var(--phone-surf)",borderRadius:14}}>
+        <div style={{fontSize:11,color:"var(--phone-text-2)"}}>Сейчас спишется</div>
+        <div className="num" style={{fontSize:30,fontWeight:800,color:"var(--phone-text-1)",letterSpacing:"-.03em",margin:"4px 0"}}>7 900 ₽</div>
+        <div style={{display:"inline-flex",alignItems:"center",gap:6,background:"var(--lime)",borderRadius:9,padding:"4px 10px"}}>
+          <span style={{fontSize:10,fontWeight:700,color:"var(--ink-1)"}}>без процентов</span>
+        </div>
+      </div>
+      <PRow l="Всего к оплате" v="12 900 ₽"/>
+      <PRow l="Платежей осталось" v="3 × 7 900 ₽"/>
+      <PRow l="Спишется с кошелька" v="xWallet ····4567" last={true}/>
+      <div style={{marginTop:14}}>{PBtn("Оплатить 7 900 ₽","dark")}</div>
+    </div>
+  )},
+  inst_done:{title:"Оплата частями оформлена", render:()=>(
+    <div style={{padding:16,textAlign:"center"}}>
+      <TickCircle/>
+      <div style={{fontSize:16,fontWeight:700,color:"var(--phone-text-1)",letterSpacing:"-.02em"}}>Покупка оформлена</div>
+      <div style={{fontSize:11,color:"var(--phone-text-2)",margin:"6px 0 13px"}}>Первый платёж прошёл · 3 платежа впереди</div>
+      <div style={{marginBottom:12}}><Bonus txt="Кэшбэк 387 ₽ зачислен на кошелёк"/></div>
+      <div style={{textAlign:"left",borderTop:"1px solid var(--phone-line-1)",paddingTop:6}}>
+        <PRow l="Оплачено сейчас" v="7 900 ₽"/>
+        <PRow l="Следующий платёж" v="через 2 недели"/>
+        <PRow l="График платежей" v="в кошельке" last={true} strong={true}/>
+      </div>
+    </div>
+  )},
+};
+
+/* ============================================================
+   PHONE — device frame (light theme, lime glow, GAMark titlebar)
+   ============================================================ */
+/* ===== GROWTH SECTION — icons, helpers, screens ===== */
+const GIco=({d,size=22,stroke=1.6})=>(
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={stroke} strokeLinecap="round" strokeLinejoin="round">{d}</svg>
+);
+const GI={
+  piggy:<><path d="M12 3v4M5 11h14M5 11v8a2 2 0 002 2h10a2 2 0 002-2v-8M5 11a4 4 0 014-4h6a4 4 0 014 4"/><circle cx="16" cy="15" r="1"/></>,
+  shield:<><path d="M12 3l8 3v6c0 5-3.5 8.5-8 9.5-4.5-1-8-4.5-8-9.5V6l8-3z"/><path d="M9 12l2 2 4-4"/></>,
+  gift:<><path d="M20 12v8H4v-8M2 8h20v4H2zM12 8v13M12 8s-4-5-7-3c-2 1.5-1 5 3 5h4zM12 8s4-5 7-3c2 1.5 1 5-3 5h-4z"/></>,
+  refresh:<><path d="M3 12a9 9 0 0115.5-6.3L21 8M21 3v5h-5M21 12a9 9 0 01-15.5 6.3L3 16M3 21v-5h5"/></>,
+  bolt:<><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></>,
+  card:<><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19M6 14.5h3.5"/></>,
+  layers:<><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5M3 16l9 5 9-5"/></>,
+  crown:<><path d="M3 8l4.5 4L12 5l4.5 7L21 8l-1.5 11H4.5L3 8z"/></>,
+  link:<><path d="M10 14a5 5 0 007 0l3-3a5 5 0 00-7-7l-1 1M14 10a5 5 0 00-7 0l-3 3a5 5 0 007 7l1-1"/></>,
+};
+const GrowthBar=({pct,col="var(--lime-deep)",delay=0.18})=>(
+  <div style={{height:6,background:"var(--phone-surf)",borderRadius:4,position:"relative",overflow:"hidden"}}>
+    <motion.div initial={{width:"0%"}} animate={{width:pct+"%"}} transition={{duration:0.9,ease:EASE,delay}} style={{position:"absolute",inset:0,background:col,borderRadius:4}}/>
+  </div>
+);
+const Avatar=({t,lime})=>(
+  <div style={{width:26,height:26,borderRadius:"50%",border:"2px solid #fff",marginLeft:-7,background:lime?"var(--lime)":"var(--ink-1)",color:lime?"var(--ink-1)":"#fff",display:"flex",alignItems:"center",justifyContent:"center",fontSize:10,fontWeight:700}}>{t}</div>
+);
+Object.assign(SCREENS, {
+  gp_kopilka:{title:"Копилка на выкуп", render:()=>(
+    <div style={{padding:16}}>
+      <PTitle t="Копилка на выкуп" s="Выделенный сервер"/>
+      <div style={{margin:"12px 0 12px",borderRadius:16,border:"1px solid var(--phone-line-1)",padding:"14px"}}>
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"baseline",marginBottom:8}}>
+          <span style={{fontSize:10,color:"var(--phone-text-2)",textTransform:"uppercase",letterSpacing:".06em"}}>Накоплено</span>
+          <span className="num" style={{background:"var(--lime)",borderRadius:8,padding:"3px 9px",fontSize:11,fontWeight:800,color:"var(--ink-1)"}}>61%</span>
+        </div>
+        <div style={{display:"flex",alignItems:"baseline",gap:7,marginBottom:10}}>
+          <span className="num" style={{fontSize:25,fontWeight:800,color:"var(--phone-text-1)",letterSpacing:"-.03em"}}>32 000 ₽</span>
+          <span className="num" style={{fontSize:12,color:"var(--phone-text-3)",fontWeight:600}}>/ 149 000 ₽</span>
+        </div>
+        <GrowthBar pct={61}/>
+        <div style={{fontSize:10,color:"var(--phone-text-3)",marginTop:8}}>Осталось 16 400 ₽ · цель к 20 июля</div>
+      </div>
+      <PRow l="Автопополнение" v="4 900 ₽ / нед"/>
+      <PRow l="Округление покупок" v="включено"/>
+      <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"10px 0"}}>
+        <span style={{fontSize:12,color:"var(--phone-text-1)",fontWeight:600}}>Проценты на остаток</span>
+        <span className="num" style={{background:"var(--lime)",borderRadius:8,padding:"3px 9px",fontSize:11,fontWeight:800,color:"var(--ink-1)"}}>начисляются</span>
+      </div>
+      <div style={{marginTop:8}}>{PBtn("Пополнить копилку","dark")}</div>
+    </div>
+  )},
+  gp_escrow:{title:"Защита платежа", render:()=>(
+    <div style={{padding:16}}>
+      <div style={{textAlign:"center",marginBottom:4}}>
+        <div style={{width:46,height:46,borderRadius:"50%",background:"var(--lime)",margin:"0 auto 10px",display:"flex",alignItems:"center",justifyContent:"center",color:"var(--ink-1)"}}>
+          <GIco d={GI.shield} size={23}/>
+        </div>
+        <div style={{fontSize:16,fontWeight:700,color:"var(--phone-text-1)",letterSpacing:"-.02em"}}>Оплата под защитой</div>
+        <div style={{fontSize:11,color:"var(--phone-text-2)",marginTop:4}}>Деньги в эскроу до получения заказа</div>
+      </div>
+      <div style={{margin:"13px 0 12px",borderRadius:13,border:"1px solid var(--phone-line-1)",padding:"11px 13px",display:"flex",alignItems:"center",gap:11}}>
+        <div style={{width:38,height:38,borderRadius:9,background:"var(--surface-2)",flexShrink:0}}/>
+        <div style={{flex:1}}>
+          <div style={{fontSize:12,fontWeight:600,color:"var(--phone-text-1)"}}>Хостинг «Бизнес» · 12 мес</div>
+          <div className="num" style={{fontSize:11,color:"var(--phone-text-2)",marginTop:1}}>12 900 ₽ · в эскроу</div>
+        </div>
+        <span style={{fontSize:9,fontWeight:700,color:"var(--ink-1)",background:"var(--lime)",borderRadius:7,padding:"3px 7px"}}>HOLD</span>
+      </div>
+      <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:12}}>
+        {[{t:"Оплачено",on:true},{t:"Активация",on:false},{t:"Получено",on:false}].map((s,i)=>(
+          <React.Fragment key={i}>
+            <span style={{fontSize:10,fontWeight:600,color:s.on?"var(--ink-1)":"var(--phone-text-3)"}}>{s.t}</span>
+            {i<2&&<span style={{flex:1,height:2,background:i===0?"var(--lime-deep)":"var(--phone-line-1)",borderRadius:1}}/>}
+          </React.Fragment>
+        ))}
+      </div>
+      <div style={{background:"var(--lime-soft)",borderRadius:11,padding:"10px 12px",display:"flex",alignItems:"flex-start",gap:9,marginBottom:13}}>
+        <span style={{color:"var(--ink-1)",marginTop:1}}><GIco d={GI.bolt} size={16}/></span>
+        <div style={{fontSize:11,fontWeight:600,color:"var(--ink-1)",lineHeight:1.35}}>Передумали? Деньги вернутся мгновенно в кошелёк — без ожидания</div>
+      </div>
+      {PBtn("Оплатить с защитой","dark")}
+    </div>
+  )},
+  gp_gift:{title:"Подарки и вишлист", render:()=>(
+    <div style={{padding:16}}>
+      <PTitle t="Кредит на выкуп" s="Предодобренный лимит · без документов"/>
+      <div style={{margin:"12px 0 12px",borderRadius:14,border:"1px solid var(--phone-line-1)",padding:"13px"}}>
+        <div style={{display:"flex",gap:11,marginBottom:11}}>
+          <div style={{width:42,height:42,borderRadius:10,background:"var(--surface-2)",flexShrink:0}}/>
+          <div style={{flex:1}}>
+            <div style={{fontSize:12,fontWeight:600,color:"var(--phone-text-1)",lineHeight:1.25}}>Хостинг «Бизнес» · 12 мес</div>
+            <div className="num" style={{fontSize:11,color:"var(--phone-text-2)",marginTop:2}}>12 900 ₽</div>
+          </div>
+        </div>
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"baseline",marginBottom:7}}>
+          <span style={{fontSize:11,color:"var(--phone-text-2)"}}>Собрано</span>
+          <span className="num" style={{fontSize:12,fontWeight:700,color:"var(--phone-text-1)"}}>18 600 ₽ <span style={{color:"var(--phone-text-3)",fontWeight:600}}>/ 12 900 ₽</span></span>
+        </div>
+        <GrowthBar pct={68}/>
+        <div style={{display:"flex",alignItems:"center",marginTop:11,paddingLeft:7}}>
+          <Avatar t="М"/><Avatar t="К" lime/><Avatar t="Л"/>
+          <span style={{marginLeft:2,fontSize:11,color:"var(--phone-text-2)",fontWeight:600}}>+2 скинулись</span>
+        </div>
+      </div>
+      <div style={{display:"flex",gap:8}}>
+        <div style={{flex:1.4}}>{PBtn("На 3 месяца","dark")}</div>
+        <div style={{flex:1}}>{PBtn("Подарить","lime")}</div>
+      </div>
+    </div>
+  )},
+  gp_replenish:{title:"Автопродление", render:()=>(
+    <div style={{padding:16}}>
+      <PTitle t="Автопродление" s="Каждые 30 дней"/>
+      <div style={{margin:"12px 0 12px",borderRadius:14,border:"1px solid var(--phone-line-1)",padding:"13px",display:"flex",gap:11,alignItems:"center"}}>
+        <div style={{width:42,height:42,borderRadius:10,background:"var(--surface-2)",flexShrink:0}}/>
+        <div style={{flex:1}}>
+          <div style={{fontSize:12,fontWeight:600,color:"var(--phone-text-1)",lineHeight:1.25}}>Пакет: 20 доменов / год</div>
+          <div style={{display:"flex",gap:6,marginTop:5}}>
+            <span style={{fontSize:9,fontWeight:700,color:"var(--ink-1)",background:"var(--surface-2)",borderRadius:6,padding:"2px 7px"}}>−10%</span>
+            <span style={{fontSize:9,fontWeight:700,color:"var(--ink-1)",background:"var(--lime)",borderRadius:6,padding:"2px 7px"}}>+ кэшбэк</span>
+          </div>
+        </div>
+        <span style={{color:"var(--phone-text-3)"}}><GIco d={GI.refresh} size={18}/></span>
+      </div>
+      <PRow l="Следующая активация" v="28 июня"/>
+      <PRow l="Списание" v="xWallet ····4567"/>
+      <PRow l="Стоимость" v="24 900 ₽ / мес" last={true} strong={true}/>
+      <div style={{marginTop:13}}>{PBtn("Управлять подпиской","dark")}</div>
+    </div>
+  )},
+});
+
+Object.assign(SCREENS, {
+  gp_kop_goal:{title:"Новая копилка", render:()=>(
+    <div style={{padding:16}}>
+      <PTitle t="Цель: Выделенный сервер" s="Соберём к нужной дате"/>
+      <div style={{margin:"12px 0 12px",borderRadius:14,border:"1px solid var(--phone-line-1)",padding:"13px",display:"flex",gap:11,alignItems:"center"}}>
+        <div style={{width:42,height:42,borderRadius:10,background:"var(--surface-2)",flexShrink:0}}/>
+        <div style={{flex:1}}>
+          <div style={{fontSize:12,fontWeight:600,color:"var(--phone-text-1)",lineHeight:1.25}}>SSL-сертификат · 1 год</div>
+          <div className="num" style={{fontSize:11,color:"var(--phone-text-2)",marginTop:2}}>149 000 ₽</div>
+        </div>
+      </div>
+      <PRow l="Автопополнение" v="4 900 ₽ / нед"/>
+      <PRow l="Округление покупок" v="включить"/>
+      <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"10px 0"}}>
+        <span style={{fontSize:12,color:"var(--phone-text-1)",fontWeight:600}}>Проценты на остаток</span>
+        <span className="num" style={{background:"var(--lime)",borderRadius:8,padding:"3px 9px",fontSize:11,fontWeight:800,color:"var(--ink-1)"}}>да</span>
+      </div>
+      <div style={{marginTop:10}}>{PBtn("Создать копилку","dark")}</div>
+    </div>
+  )},
+  gp_kop_done:{title:"Цель достигнута", render:()=>(
+    <div style={{padding:16}}>
+      <div style={{textAlign:"center"}}>
+        <TickCircle/>
+        <div style={{fontSize:16,fontWeight:700,color:"var(--phone-text-1)",letterSpacing:"-.02em"}}>Цель достигнута!</div>
+        <div style={{fontSize:11,color:"var(--phone-text-2)",marginTop:4}}>149 000 ₽ накоплено — оплатите в один тап</div>
+      </div>
+      <div style={{margin:"13px 0 12px",borderRadius:14,border:"1px solid var(--phone-line-1)",padding:"13px",display:"flex",gap:11,alignItems:"center"}}>
+        <div style={{width:40,height:40,borderRadius:10,background:"var(--surface-2)",flexShrink:0}}/>
+        <div style={{flex:1}}>
+          <div style={{fontSize:12,fontWeight:600,color:"var(--phone-text-1)"}}>SSL-сертификат · 1 год</div>
+          <div className="num" style={{fontSize:11,color:"var(--phone-text-2)",marginTop:1}}>149 000 ₽ · из копилки</div>
+        </div>
+        <span style={{fontSize:9,fontWeight:700,color:"var(--ink-1)",background:"var(--lime)",borderRadius:7,padding:"3px 7px"}}>100%</span>
+      </div>
+      <Bonus txt="+450 кэшбэка за покупку из копилки"/>
+      <div style={{marginTop:11}}>{PBtn("Оплатить из копилки","dark")}</div>
+    </div>
+  )},
+  gp_esc_refund:{title:"Мгновенный возврат", render:()=>(
+    <div style={{padding:16}}>
+      <div style={{textAlign:"center",marginBottom:4}}>
+        <div style={{width:46,height:46,borderRadius:"50%",background:"var(--lime)",margin:"0 auto 10px",display:"flex",alignItems:"center",justifyContent:"center",color:"var(--ink-1)"}}>
+          <GIco d={GI.refresh} size={22}/>
+        </div>
+        <div style={{fontSize:16,fontWeight:700,color:"var(--phone-text-1)",letterSpacing:"-.02em"}}>Возврат оформлен</div>
+        <div style={{fontSize:11,color:"var(--phone-text-2)",marginTop:4}}>Деньги уже в кошельке — без ожидания</div>
+      </div>
+      <div style={{margin:"13px 0 12px",borderRadius:13,border:"1px solid var(--phone-line-1)",padding:"11px 13px",display:"flex",alignItems:"center",gap:11}}>
+        <div style={{width:38,height:38,borderRadius:9,background:"var(--surface-2)",flexShrink:0}}/>
+        <div style={{flex:1}}>
+          <div style={{fontSize:12,fontWeight:600,color:"var(--phone-text-1)"}}>Хостинг «Бизнес» · 12 мес</div>
+          <div className="num" style={{fontSize:11,color:"var(--phone-text-2)",marginTop:1}}>Возврат 12 900 ₽</div>
+        </div>
+        <span className="num" style={{fontSize:9,fontWeight:700,color:"var(--ink-1)",background:"var(--lime)",borderRadius:7,padding:"3px 7px"}}>+12 900 ₽</span>
+      </div>
+      <div style={{display:"flex",gap:9}}>
+        <div style={{flex:1,borderRadius:11,border:"1px solid var(--phone-line-1)",padding:"10px",textAlign:"center"}}>
+          <div style={{fontSize:10,color:"var(--phone-text-3)"}}>На стороннюю карту</div>
+          <div style={{fontSize:12,fontWeight:700,color:"var(--phone-text-2)",marginTop:3}}>7–14 дней</div>
+        </div>
+        <div style={{flex:1,borderRadius:11,background:"var(--lime-soft)",padding:"10px",textAlign:"center",border:"1px solid var(--lime-deep)"}}>
+          <div style={{fontSize:10,color:"var(--ink-1)",fontWeight:600}}>В xWallet</div>
+          <div style={{fontSize:12,fontWeight:800,color:"var(--ink-1)",marginTop:3}}>мгновенно</div>
+        </div>
+      </div>
+      <div style={{marginTop:12}}>{PBtn("Вернуть в кошелёк","dark")}</div>
+    </div>
+  )},
+  gp_esc_stay:{title:"Остаётся у вас", render:()=>(
+    <div style={{padding:16}}>
+      <PTitle t="Деньги в кошельке" s="Готовы к следующей покупке"/>
+      <div style={{margin:"12px 0 12px"}}><WalletCard balance="12 900 ₽" num="•••• 4567"/></div>
+      <div style={{background:"var(--lime-soft)",borderRadius:11,padding:"10px 12px",display:"flex",alignItems:"flex-start",gap:9,marginBottom:13}}>
+        <span style={{color:"var(--ink-1)",marginTop:1}}><GIco d={GI.bolt} size={16}/></span>
+        <div style={{fontSize:11,fontWeight:600,color:"var(--ink-1)",lineHeight:1.35}}>Возврат не ушёл в другой банк — клиент тратит его снова у Рег.ру</div>
+      </div>
+      {PBtn("Выбрать новый аромат","dark")}
+    </div>
+  )},
+  gp_gift_wish:{title:"Вишлист", render:()=>(
+    <div style={{padding:16}}>
+      <PTitle t="Кредитный лимит" s="День рождения · 14 июля"/>
+      <div style={{marginTop:12,display:"flex",flexDirection:"column",gap:9}}>
+        {[{n:"Хостинг «Бизнес» · 12 мес",p:"12 900 ₽",hot:true},{n:"Домен .ru · 1 год",p:"9 900 ₽"},{n:"Домен .рф · 1 год 35 см",p:"11 200 ₽"}].map((it,i)=>(
+          <div key={i} style={{display:"flex",gap:11,alignItems:"center",borderRadius:12,border:"1px solid var(--phone-line-1)",padding:"10px 12px"}}>
+            <div style={{width:38,height:38,borderRadius:9,background:"var(--surface-2)",flexShrink:0}}/>
+            <div style={{flex:1}}>
+              <div style={{fontSize:12,fontWeight:600,color:"var(--phone-text-1)",lineHeight:1.25}}>{it.n}</div>
+              <div className="num" style={{fontSize:11,color:"var(--phone-text-2)",marginTop:1}}>{it.p}</div>
+            </div>
+            {it.hot&&<span style={{fontSize:9,fontWeight:700,color:"var(--ink-1)",background:"var(--lime)",borderRadius:7,padding:"3px 7px"}}>топ</span>}
+          </div>
+        ))}
+      </div>
+      <div style={{marginTop:12}}>{PBtn("Использовать лимит","dark")}</div>
+    </div>
+  )},
+  gp_gift_done:{title:"Подарок собран", render:()=>(
+    <div style={{padding:16}}>
+      <div style={{textAlign:"center"}}>
+        <TickCircle/>
+        <div style={{fontSize:16,fontWeight:700,color:"var(--phone-text-1)",letterSpacing:"-.02em"}}>Кредит оформлен</div>
+        <div style={{fontSize:11,color:"var(--phone-text-2)",marginTop:4}}>Выкуп оплачен · первый платёж 12 900 ₽</div>
+      </div>
+      <div style={{margin:"13px 0 12px"}}><WalletCard balance="12 900 ₽" num="•••• 4567" soft={true}/></div>
+      <div style={{display:"flex",alignItems:"center",marginBottom:13,paddingLeft:7}}>
+        <Avatar t="М"/><Avatar t="К" lime/><Avatar t="Л"/><Avatar t="+2"/>
+        <span style={{marginLeft:6,fontSize:11,color:"var(--phone-text-2)",fontWeight:600}}>Ежемесячный платёж</span>
+      </div>
+      {PBtn("Оплатить услуги","dark")}
+    </div>
+  )},
+  gp_rep_setup:{title:"Новая подписка", render:()=>(
+    <div style={{padding:16}}>
+      <PTitle t="Автопродление" s="Автоповтор любимого сета"/>
+      <div style={{margin:"12px 0 12px",borderRadius:14,border:"1px solid var(--phone-line-1)",padding:"13px",display:"flex",gap:11,alignItems:"center"}}>
+        <div style={{width:42,height:42,borderRadius:10,background:"var(--surface-2)",flexShrink:0}}/>
+        <div style={{flex:1}}>
+          <div style={{fontSize:12,fontWeight:600,color:"var(--phone-text-1)",lineHeight:1.25}}>Пакет: 20 доменов / год</div>
+          <div className="num" style={{fontSize:11,color:"var(--phone-text-2)",marginTop:2}}>12 900 ₽ → 24 900 ₽</div>
+        </div>
+      </div>
+      <PRow l="Периодичность" v="ежемесячно"/>
+      <PRow l="Скидка на активацию" v="−10%"/>
+      <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"10px 0"}}>
+        <span style={{fontSize:12,color:"var(--phone-text-1)",fontWeight:600}}>Кэшбэк за регулярность</span>
+        <span className="num" style={{background:"var(--lime)",borderRadius:8,padding:"3px 9px",fontSize:11,fontWeight:800,color:"var(--ink-1)"}}>+5%</span>
+      </div>
+      <div style={{marginTop:10}}>{PBtn("Оформить подписку","dark")}</div>
+    </div>
+  )},
+  gp_rep_spend:{title:"Регулярность", render:()=>(
+    <div style={{padding:16}}>
+      <PTitle t="Ваша подписка" s="3 активации подряд"/>
+      <div style={{margin:"12px 0 12px",borderRadius:14,border:"1px solid var(--phone-line-1)",padding:"13px"}}>
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"baseline",marginBottom:9}}>
+          <span style={{fontSize:11,color:"var(--phone-text-2)"}}>Накоплено кэшбэка</span>
+          <span className="num" style={{fontSize:18,fontWeight:800,color:"var(--phone-text-1)",letterSpacing:"-.02em"}}>1 280</span>
+        </div>
+        <GrowthBar pct={75}/>
+        <div style={{fontSize:10,color:"var(--phone-text-3)",marginTop:8}}>До статуса «Платина» — 1 активация</div>
+      </div>
+      <PRow l="Активация №3" v="доставлено"/>
+      <PRow l="Следующее списание" v="28 июля"/>
+      <PRow l="Экономия за 3 мес" v="7 900 ₽" last={true} strong={true}/>
+      <div style={{marginTop:11}}>{PBtn("Управлять подпиской","dark")}</div>
+    </div>
+  )},
+});
+
+function Phone({screenKey}){
+  const screen = SCREENS[screenKey] || SCREENS.ga_checkout;
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  const rotY = useTransform(mx, [-1, 1], [8, -8]);
+  const rotX = useTransform(my, [-1, 1], [-6, 6]);
+  const sRotY = useSpring(rotY, { stiffness:120, damping:16, mass:0.6 });
+  const sRotX = useSpring(rotX, { stiffness:120, damping:16, mass:0.6 });
+  const ref = useRef(null);
+  const onMove = (e)=>{
+    const r = ref.current.getBoundingClientRect();
+    const cx = r.left + r.width/2, cy = r.top + r.height/2;
+    mx.set((e.clientX - cx) / (r.width/2));
+    my.set((e.clientY - cy) / (r.height/2));
+  };
+  const onLeave = ()=>{ mx.set(0); my.set(0); };
+
+  return (
+    <div style={{perspective:1200, position:"relative", padding:"40px 20px", width:"100%", display:"flex", justifyContent:"center"}}>
+      <div style={{position:"absolute", width:380, height:580, borderRadius:"50%", background:"radial-gradient(circle, rgba(53,203,99,0.42) 0%, rgba(53,203,99,0) 65%)", filter:"blur(46px)", zIndex:0, top:"50%", left:"50%", transform:"translate(-50%,-50%)", pointerEvents:"none"}}/>
+      <motion.div
+        ref={ref}
+        onMouseMove={onMove}
+        onMouseLeave={onLeave}
+        style={{
+          rotateY:sRotY, rotateX:sRotX, transformStyle:"preserve-3d",
+          width:296, height:600, borderRadius:48,
+          background:"linear-gradient(180deg, #232323 0%, #0a0a0a 100%)",
+          padding:11, position:"relative", flexShrink:0,
+          boxShadow:`0 1px 0 rgba(255,255,255,0.10) inset, 0 0 0 1px rgba(10,10,10,0.06), 0 30px 60px -20px rgba(10,10,10,0.35), 0 60px 120px -30px rgba(53,203,99,0.28), 0 100px 180px -50px rgba(53,203,99,0.16)`
+        }}
+        initial={{opacity:0, y:40, scale:0.96}}
+        animate={{opacity:1, y:0, scale:1}}
+        transition={{...SPRING.silky, delay:0.3}}>
+        <div style={{position:"absolute",left:-2,top:108,width:3,height:30,background:"#161616",borderRadius:2}}/>
+        <div style={{position:"absolute",left:-2,top:154,width:3,height:52,background:"#161616",borderRadius:2}}/>
+        <div style={{position:"absolute",left:-2,top:218,width:3,height:52,background:"#161616",borderRadius:2}}/>
+        <div style={{position:"absolute",right:-2,top:150,width:3,height:80,background:"#161616",borderRadius:2}}/>
+        <div style={{borderRadius:37, overflow:"hidden", background:"var(--phone-bg)", height:"100%", position:"relative"}}>
+          <div style={{position:"absolute",top:9,left:"50%",transform:"translateX(-50%)",width:96,height:28,background:"#000",borderRadius:14,zIndex:5}}/>
+          <div style={{paddingTop:42,height:"100%",display:"flex",flexDirection:"column"}}>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={screenKey}
+                initial={{opacity:0, y:14, filter:"blur(6px)"}}
+                animate={{opacity:1, y:0, filter:"blur(0px)"}}
+                exit={{opacity:0, y:-10, filter:"blur(6px)"}}
+                transition={{duration:0.42, ease:EASE}}
+                style={{flex:"1 1 0",display:"flex",flexDirection:"column",minHeight:0}}>
+                <div className="phone-screen">
+                  <div className="phone-status">
+                    <span className="num">9:41</span>
+                    <div style={{display:"flex",gap:4,alignItems:"center"}}>
+                      <svg width="14" height="9" viewBox="0 0 14 9" fill="none">
+                        <rect x="0.5" y="0.5" width="10" height="8" rx="1.5" stroke="var(--phone-text-1)"/>
+                        <rect x="2" y="2" width="7" height="5" fill="var(--phone-text-1)"/>
+                        <rect x="11.5" y="3" width="1.5" height="3" rx="0.4" fill="var(--phone-text-1)"/>
+                      </svg>
+                    </div>
+                  </div>
+                  <div className="phone-titlebar">
+                    <BrandLogo height={13}/>
+                    <div style={{fontSize:11,fontWeight:600,color:"var(--phone-text-1)",letterSpacing:"-.01em"}}>{screen.title}</div>
+                  </div>
+                  <div style={{flex:"1 1 0",overflow:"hidden",minHeight:0}}>{screen.render()}</div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+            <div style={{height:22,display:"flex",alignItems:"center",justifyContent:"center",background:"var(--phone-bg)"}}>
+              <div style={{width:108,height:4,background:"#000",borderRadius:2,opacity:.85}}/>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
+/* ============================================================
+   DESKTOP — браузерное окно личного кабинета Рег.ру
+   ============================================================ */
+const DESK_NAV = [
+  {k:"domains", t:"Домены"},
+  {k:"hosting", t:"Хостинг"},
+  {k:"servers", t:"Серверы"},
+  {k:"wallet",  t:"xWallet"},
+  {k:"docs",    t:"Документы"},
+];
+
+function Laptop({screenKey}){
+  const screen = SCREENS[screenKey] || SCREENS.ga_checkout;
+  return (
+    <div style={{position:"relative", width:"100%", display:"flex", flexDirection:"column", alignItems:"center", padding:"4px 0 0"}}>
+      <div style={{position:"absolute", width:540, height:360, borderRadius:"50%", background:"radial-gradient(circle, rgba(53,203,99,0.34) 0%, rgba(53,203,99,0) 66%)", filter:"blur(52px)", zIndex:0, top:"42%", left:"50%", transform:"translate(-50%,-50%)", pointerEvents:"none"}}/>
+
+      <motion.div
+        initial={{opacity:0, y:30, scale:0.97}}
+        animate={{opacity:1, y:0, scale:1}}
+        transition={{...SPRING.silky, delay:0.2}}
+        style={{width:"100%", maxWidth:580, position:"relative", zIndex:1}}>
+
+        {/* крышка ноутбука */}
+        <div style={{
+          background:"linear-gradient(170deg, #34373D 0%, #1B1D21 100%)",
+          borderRadius:"16px 16px 7px 7px", padding:"13px 13px 15px",
+          boxShadow:"0 26px 50px -22px rgba(28,30,34,0.52), 0 0 0 1px rgba(255,255,255,0.05) inset"
+        }}>
+          {/* камера */}
+          <div style={{display:"flex", justifyContent:"center", paddingBottom:8}}>
+            <span style={{width:5,height:5,borderRadius:"50%",background:"#0D0E10",boxShadow:"0 0 0 1.5px rgba(255,255,255,0.07)",display:"block"}}/>
+          </div>
+
+          <div style={{borderRadius:6, overflow:"hidden", background:"var(--phone-bg)", border:"1px solid rgba(0,0,0,0.5)"}}>
+            {/* строка браузера */}
+            <div style={{display:"flex", alignItems:"center", gap:9, padding:"8px 11px", background:"var(--surface-1)", borderBottom:"1px solid var(--line-1)"}}>
+              <div style={{display:"flex", gap:5}}>
+                <span style={{width:8,height:8,borderRadius:"50%",background:"#FF5F57",display:"block"}}/>
+                <span style={{width:8,height:8,borderRadius:"50%",background:"#FEBC2E",display:"block"}}/>
+                <span style={{width:8,height:8,borderRadius:"50%",background:"#28C840",display:"block"}}/>
+              </div>
+              <div style={{flex:1, background:"var(--phone-bg)", border:"1px solid var(--line-1)", borderRadius:6, padding:"4px 9px", display:"flex", alignItems:"center", gap:6, minWidth:0}}>
+                <svg width="8" height="10" viewBox="0 0 9 11" fill="none" style={{flexShrink:0}}>
+                  <rect x="0.6" y="4.4" width="7.8" height="6" rx="1.4" stroke="var(--ink-3)" strokeWidth="1.1"/>
+                  <path d="M2.6 4.4V3a1.9 1.9 0 0 1 3.8 0v1.4" stroke="var(--ink-3)" strokeWidth="1.1"/>
+                </svg>
+                <span className="num" style={{fontSize:9.5, color:"var(--ink-3)", whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis"}}>reg.ru/user/xwallet</span>
+              </div>
+            </div>
+
+            {/* кабинет */}
+            <div style={{display:"flex", minHeight:352}}>
+              <div className="lap-side" style={{width:124, flexShrink:0, borderRight:"1px solid var(--line-1)", background:"var(--bg-warm)", padding:"12px 8px", display:"flex", flexDirection:"column", gap:2}}>
+                <div style={{padding:"0 4px 10px"}}><BrandLogo height={14}/></div>
+                {DESK_NAV.map(n=>{
+                  const on = n.k==="wallet";
+                  return (
+                    <div key={n.k} style={{padding:"6px 8px", borderRadius:7, fontSize:11, fontWeight:on?700:500, color:on?"#fff":"var(--ink-2)", background:on?"var(--ink-1)":"transparent", letterSpacing:"-.01em"}}>{n.t}</div>
+                  );
+                })}
+                <div style={{marginTop:"auto", padding:"8px 8px 0", borderTop:"1px solid var(--line-1)", display:"flex", alignItems:"center", gap:6}}>
+                  <div style={{width:19,height:19,borderRadius:"50%",background:"var(--lime-soft)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:8.5,fontWeight:800,color:"var(--lime-deep)"}}>ОР</div>
+                  <div style={{fontSize:9, color:"var(--ink-3)", lineHeight:1.2}}>ООО<br/>«Ромашка»</div>
+                </div>
+              </div>
+
+              <div style={{flex:"1 1 0", minWidth:0, display:"flex", flexDirection:"column", background:"var(--phone-bg)"}}>
+                <div style={{padding:"10px 14px", borderBottom:"1px solid var(--line-1)", display:"flex", alignItems:"center", justifyContent:"space-between", gap:9}}>
+                  <div style={{fontSize:12, fontWeight:700, color:"var(--phone-text-1)", letterSpacing:"-.015em"}}>{screen.title}</div>
+                  <div style={{fontSize:9, fontWeight:700, color:"var(--lime-deep)", background:"var(--lime-soft)", borderRadius:5, padding:"3px 7px", whiteSpace:"nowrap"}}>xWallet B2B</div>
+                </div>
+                <div style={{flex:"1 1 0", minHeight:0, display:"flex", justifyContent:"center", alignItems:"flex-start", padding:"12px 10px", overflow:"hidden"}}>
+                  <AnimatePresence mode="wait">
+                    <motion.div key={screenKey}
+                      initial={{opacity:0, y:10, filter:"blur(6px)"}}
+                      animate={{opacity:1, y:0, filter:"blur(0px)"}}
+                      exit={{opacity:0, y:-8, filter:"blur(6px)"}}
+                      transition={{duration:0.4, ease:EASE}}
+                      className="phone-screen"
+                      style={{width:"100%", maxWidth:282, display:"flex", flexDirection:"column", minHeight:0}}>
+                      <div style={{flex:"1 1 0", overflow:"hidden", minHeight:0}}>{screen.render()}</div>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* основание ноутбука */}
+        <div style={{position:"relative", width:"114%", marginLeft:"-7%"}}>
+          <div style={{height:11, background:"linear-gradient(180deg, #2A2D33 0%, #16181B 100%)", borderRadius:"0 0 11px 11px", boxShadow:"0 16px 26px -14px rgba(28,30,34,0.55)"}}/>
+          <div style={{position:"absolute", top:0, left:"50%", transform:"translateX(-50%)", width:84, height:5, background:"#101215", borderRadius:"0 0 6px 6px"}}/>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
+/* ============================================================
+   РКО — расчётный счёт в Альфа-Банке (вход в продукт)
+   ============================================================ */
+const RKO_PERKS = [
+  {t:"0 ₽", short:"открытие и обслуживание"},
+  {t:"до 10%", short:"кэшбэк по бизнес-карте"},
+  {t:"до 100%", short:"суперкэшбэк у партнёров"},
+  {t:"до 3%", short:"на остаток по счёту"},
+];
+const RKO_TARIFFS = [
+  {n:"Ноль за обслуживание", d:"Для начинающего или сезонного бизнеса", p:"0 ₽", s:"при поступлениях до 1 млн ₽ в месяц"},
+  {n:"Простой", d:"Для обслуживания без лишних условий", p:"1%", s:"от поступлений — до 750 000 ₽ в месяц"},
+  {n:"Быстрое развитие", d:"Для активно развивающегося бизнеса", p:"995 ₽", s:"в месяц", old:"1990 ₽"},
+  {n:"Активные расчёты", d:"Для частых расчётов с контрагентами", p:"1995 ₽", s:"в месяц", old:"3990 ₽"},
+];
+const RKO_STEPS = [
+  {n:"1", t:"Оставьте номер", d:"Заявка — одно поле, без анкет"},
+  {n:"2", t:"Менеджер перезвонит", d:"Уточнит данные и привезёт документы"},
+  {n:"3", t:"Готово", d:"Доступен xWallet на сайте Рег.ру"},
+];
+
+function RKOSection(){
+  const [open, setOpen] = useState(false);
+  return (
+    <section className="section" style={{maxWidth:1320, margin:"0 auto", padding:"0 40px 30px"}}>
+      <div style={{border:"1px solid var(--line-2)", borderRadius:20, padding:"20px 22px", background:"var(--bg-warm)"}}>
+        <div style={{display:"flex", alignItems:"center", gap:16, flexWrap:"wrap"}}>
+          <div style={{display:"flex", alignItems:"center", gap:11, minWidth:0, flex:"1 1 320px"}}>
+            <span className="num" style={{fontSize:10, fontWeight:700, letterSpacing:"0.1em", color:"var(--ink-3)", border:"1px solid var(--line-2)", borderRadius:6, padding:"4px 8px", whiteSpace:"nowrap"}}>ШАГ 0</span>
+            <div style={{minWidth:0}}>
+              <div style={{fontSize:14.5, fontWeight:700, letterSpacing:"-0.02em", color:"var(--ink-1)"}}>Расчётный счёт в Альфа-Банке — вход в кошелёк</div>
+              <div style={{fontSize:12, color:"var(--ink-3)", marginTop:2}}>Заявка — один номер телефона. Открытие и обслуживание бесплатно</div>
+            </div>
+          </div>
+          <div style={{display:"flex", gap:7, flexWrap:"wrap", alignItems:"center"}}>
+            {RKO_PERKS.map((p,i)=>(
+              <span key={i} style={{display:"inline-flex", alignItems:"baseline", gap:5, background:"var(--bg)", border:"1px solid var(--line-1)", borderRadius:999, padding:"6px 11px", whiteSpace:"nowrap"}}>
+                <b style={{fontSize:12, fontWeight:800, color:"var(--lime-deep)", letterSpacing:"-0.01em"}}>{p.t}</b>
+                <span style={{fontSize:11, color:"var(--ink-3)"}}>{p.short}</span>
+              </span>
+            ))}
+            <button onClick={()=>setOpen(!open)}
+              style={{display:"inline-flex", alignItems:"center", gap:6, border:"1px solid var(--line-2)", background:"var(--bg)", borderRadius:999, padding:"6px 12px", fontSize:11.5, fontWeight:600, color:"var(--ink-2)", cursor:"pointer", fontFamily:"inherit", whiteSpace:"nowrap"}}>
+              {open?"Свернуть":"Тарифы и шаги"}
+              <motion.span animate={{rotate:open?180:0}} transition={{duration:0.3, ease:EASE}} style={{display:"inline-flex"}}>
+                <svg width="10" height="7" viewBox="0 0 10 7" fill="none"><path d="M1 1.5 5 5.5 9 1.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              </motion.span>
+            </button>
+          </div>
+        </div>
+
+        <AnimatePresence initial={false}>
+          {open && (
+            <motion.div
+              initial={{height:0, opacity:0}} animate={{height:"auto", opacity:1}} exit={{height:0, opacity:0}}
+              transition={{duration:0.42, ease:EASE}} style={{overflow:"hidden"}}>
+              <div style={{paddingTop:20, marginTop:18, borderTop:"1px solid var(--line-1)"}}>
+                <div style={{display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(178px, 1fr))", gap:10, marginBottom:16}}>
+                  {RKO_TARIFFS.map((t,i)=>(
+                    <div key={i} style={{background:"var(--bg)", border:"1px solid var(--line-1)", borderRadius:14, padding:"13px 13px", display:"flex", flexDirection:"column", gap:5}}>
+                      <div style={{fontSize:12.5, fontWeight:700, color:"var(--ink-1)", letterSpacing:"-.015em", lineHeight:1.2}}>{t.n}</div>
+                      <div style={{fontSize:10.5, color:"var(--ink-3)", lineHeight:1.35, minHeight:26}}>{t.d}</div>
+                      <div style={{display:"flex", alignItems:"baseline", gap:6, marginTop:"auto", paddingTop:4}}>
+                        <span className="num" style={{fontSize:18, fontWeight:800, color:"var(--ink-1)", letterSpacing:"-.03em"}}>{t.p}</span>
+                        {t.old && <span className="num" style={{fontSize:10.5, color:"var(--ink-4)", textDecoration:"line-through"}}>{t.old}</span>}
+                      </div>
+                      <div style={{fontSize:10, color:"var(--ink-3)", lineHeight:1.3}}>{t.s}</div>
+                    </div>
+                  ))}
+                </div>
+                <div style={{display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(200px, 1fr))", gap:10}}>
+                  {RKO_STEPS.map((s,i)=>(
+                    <div key={i} style={{background:"var(--bg)", border:"1px solid var(--line-1)", borderRadius:14, padding:"13px 14px", display:"flex", gap:11, alignItems:"flex-start"}}>
+                      <div style={{width:24, height:24, borderRadius:"50%", border:"1.5px solid var(--lime)", display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0, fontSize:11, fontWeight:800, color:"var(--lime-deep)"}}>{s.n}</div>
+                      <div>
+                        <div style={{fontSize:12.5, fontWeight:700, color:"var(--ink-1)", letterSpacing:"-.015em", marginBottom:3}}>{s.t}</div>
+                        <div style={{fontSize:10.5, color:"var(--ink-3)", lineHeight:1.35}}>{s.d}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </section>
+  );
+}
+/* ============================================================
+   NAVBAR — non-sticky, scrolls with page, light, co-brand
+   ============================================================ */
+function Navbar({scrolled}){
+  return (
+    <motion.div
+      initial={{opacity:0, y:-12}}
+      animate={{opacity:1, y:0}}
+      transition={{duration:0.6, ease:EASE, delay:0.1}}
+      style={{
+        position:"relative", zIndex:50,
+        backdropFilter:scrolled?"blur(20px) saturate(140%)":"blur(0px)",
+        WebkitBackdropFilter:scrolled?"blur(20px) saturate(140%)":"blur(0px)",
+        background:scrolled?"rgba(255,255,255,0.78)":"transparent",
+        borderBottom:scrolled?"1px solid var(--line-1)":"1px solid transparent",
+        transition:"background 300ms, border 300ms, backdrop-filter 300ms"
+      }}>
+      <div style={{maxWidth:1320, margin:"0 auto", padding:"20px 40px 14px", display:"flex", justifyContent:"space-between", alignItems:"center", gap:16, flexWrap:"wrap"}} className="navbar-inner">
+        <div style={{display:"flex",alignItems:"center",gap:13}}>
+          <BrandLogo height={104}/>
+          <div style={{fontSize:13,fontWeight:600,letterSpacing:"-.005em",color:"var(--ink-1)"}}>
+            <span style={{color:"var(--ink-3)",fontWeight:500}}>×</span> Альфа-Банк
+            <span style={{color:"var(--ink-3)",fontWeight:400,marginLeft:8}}>/ xWallet B2B</span>
+          </div>
+        </div>
+        <div/>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+function Hero({view, setView, activeJourney, setActiveJourney, clientType, setClientType}){
+  return (
+    <section className="hero" style={{padding:"18px 40px 26px", maxWidth:1320, margin:"0 auto", position:"relative", display:"flex", flexDirection:"column", justifyContent:"flex-end"}}>
+
+      <div className="hero-top" style={{display:"grid", gridTemplateColumns:"minmax(0, 1fr) minmax(0, 372px)", gap:56, alignItems:"start", marginBottom:26}}>
+        <div>
+          <motion.div initial={{opacity:0, y:8}} animate={{opacity:1, y:0}} transition={{duration:0.8, ease:EASE, delay:0.2}} className="eyebrow" style={{marginBottom:18}}>
+            Customer Journey Map · Рег.ру × Альфа-Банк
+          </motion.div>
+          <h1 className="display" style={{fontSize:"clamp(40px, 5.4vw, 78px)", fontWeight:800, letterSpacing:"-0.045em", lineHeight:0.96, margin:0, color:"var(--ink-1)"}}>
+            <motion.span initial={{opacity:0, y:60, filter:"blur(12px)"}} animate={{opacity:1, y:0, filter:"blur(0px)"}} transition={{duration:0.9, ease:EASE, delay:0.35}} style={{display:"inline-block"}}>xWallet</motion.span>{" "}
+            <motion.span initial={{opacity:0, y:60, filter:"blur(12px)"}} animate={{opacity:1, y:0, filter:"blur(0px)"}} transition={{duration:0.9, ease:EASE, delay:0.53}} className="mark-hl" style={{display:"inline-block"}}><span>B2B</span></motion.span>
+          </h1>
+        </div>
+        <motion.div initial={{opacity:0, y:-10}} animate={{opacity:1, y:0}} transition={{duration:0.8, ease:EASE, delay:0.45}}
+          style={{fontSize:16.5, color:"var(--ink-1)", lineHeight:1.5, letterSpacing:"-0.01em", fontWeight:500, justifySelf:"end"}}>
+          Кошелёк компании в личном кабинете Рег.ру. Домены, хостинг и серверы оплачиваются с баланса в один клик — без счетов на оплату, ожидания проводки и ручной сверки. Открывается после расчётного счёта в Альфа-Банке.
+        </motion.div>
+      </div>
+
+      <ScenarioTabs view={view} setView={setView} activeJourney={activeJourney} setActiveJourney={setActiveJourney} clientType={clientType} setClientType={setClientType}/>
+    </section>
+  );
+}
+
+/* ============================================================
+   SCENARIO TABS — two groups, each with its own pill
+   ============================================================ */
+function TabRow({title, items, activeJourney, setActiveJourney, pillId}){
+  return (
+    <div style={{marginBottom:14}}>
+      <div className="eyebrow no-mark" style={{display:"block", fontSize:10, letterSpacing:"0.16em", color:"var(--ink-3)", marginBottom:11, fontWeight:600}}>{title}</div>
+      <LayoutGroup id={pillId}>
+        <div style={{display:"inline-flex", background:"var(--surface-1)", border:"1px solid var(--line-2)", borderRadius:18, padding:5, gap:2, maxWidth:"100%", flexWrap:"wrap"}}>
+          {items.map(({j, gi})=>{
+            const active = gi === activeJourney;
+            return (
+              <button key={j.id} onClick={()=>setActiveJourney(gi)}
+                style={{position:"relative", padding:"12px 18px", borderRadius:14, fontSize:13.5, fontWeight:600, letterSpacing:"-0.005em", color: active ? "#fff" : "var(--ink-2)", display:"flex", alignItems:"center", gap:9, zIndex:1, background:"transparent", border:"none", cursor:"pointer", transition:"color 200ms"}}>
+                {active && (
+                  <motion.div layoutId={pillId+"-pill"} transition={{...SPRING.snappy}}
+                    style={{position:"absolute", inset:0, background:"var(--ink-1)", borderRadius:14, boxShadow:"0 8px 20px -6px rgba(10,10,10,0.30)", zIndex:-1}}/>
+                )}
+                {j.label}
+              </button>
+            );
+          })}
+        </div>
+      </LayoutGroup>
+    </div>
+  );
+}
+function ClientSwitch({clientType, setClientType}){
+  const opts=[
+    {k:"new", t:"Новый клиент", s:"Счёта в Альфа-Банке ещё нет"},
+    {k:"existing", t:"Действующий клиент", s:"Счёт открыт — подключаем кошелёк"},
+  ];
+  return (
+    <motion.div initial={{opacity:0, y:18}} animate={{opacity:1, y:0}} transition={{duration:0.8, ease:EASE, delay:0.8}}
+      style={{marginBottom:22}}>
+      <div className="num" style={{fontSize:10,letterSpacing:"0.16em",color:"var(--ink-3)",marginBottom:12,fontWeight:600,textTransform:"uppercase"}}>Кто перед нами</div>
+      <LayoutGroup id="client-switch">
+        <div className="client-switch" style={{display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(240px, 1fr))", gap:12, maxWidth:720}}>
+          {opts.map(o=>{
+            const on = clientType===o.k;
+            return (
+              <button key={o.k} onClick={()=>setClientType(o.k)}
+                style={{position:"relative", textAlign:"left", cursor:"pointer", border:"none", background:"transparent", padding:0, fontFamily:"inherit"}}>
+                <div style={{position:"relative", zIndex:1, padding:"18px 20px", borderRadius:18, border:on?"1px solid transparent":"1px solid var(--line-2)", transition:"border-color 220ms"}}>
+                  <div style={{display:"flex",alignItems:"center",gap:9,marginBottom:5}}>
+                    <span style={{width:8,height:8,borderRadius:"50%",display:"block",background:on?"var(--lime)":"var(--line-3)",boxShadow:on?"0 0 0 4px rgba(53,203,99,0.25)":"none",transition:"all 220ms"}}/>
+                    <span style={{fontSize:15.5,fontWeight:700,letterSpacing:"-0.02em",color:on?"#fff":"var(--ink-1)",transition:"color 220ms"}}>{o.t}</span>
+                  </div>
+                  <div style={{fontSize:12.5,color:on?"rgba(255,255,255,0.62)":"var(--ink-3)",letterSpacing:"-0.005em",transition:"color 220ms"}}>{o.s}</div>
+                </div>
+                {on && <motion.div layoutId="client-pill" transition={{...SPRING.snappy}}
+                  style={{position:"absolute", inset:0, background:"var(--ink-1)", borderRadius:18, boxShadow:"0 14px 30px -10px rgba(28,30,34,0.42)", zIndex:0}}/>}
+              </button>
+            );
+          })}
+        </div>
+      </LayoutGroup>
+    </motion.div>
+  );
+}
+
+function ScenarioTabs({view, setView, activeJourney, setActiveJourney, clientType, setClientType}){
+  const items = journeys.map((j,gi)=>({j,gi})).filter(x=>x.j.client===clientType || x.j.client==="both");
+  const cjm = view === "cjm";
+  const growthActive = view === "growth";
+  const pickJourney = (gi)=>{ setActiveJourney(gi); setView("cjm"); };
+  const pickClient = (k)=>{
+    setClientType(k);
+    const first = journeys.findIndex(j=>j.client===k);
+    if(first>=0){ setActiveJourney(first); setView("cjm"); }
+  };
+  const GROWTH_DESC = "Сценарии, которые может дать только банк с лицензией — не обычный платёжный сервис";
+  return (
+    <div>
+      <ClientSwitch clientType={clientType} setClientType={pickClient}/>
+      <motion.div initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} transition={{duration:0.8, ease:EASE, delay:0.9}}>
+        <div style={{display:"flex", alignItems:"flex-end", gap:14, flexWrap:"wrap", marginBottom:14}}>
+          <TabRow title="Сценарий" items={items} activeJourney={cjm?activeJourney:-1} setActiveJourney={pickJourney} pillId={"grp-"+clientType}/>
+          <button onClick={()=>setView("growth")}
+            style={{position:"relative", display:"inline-flex", alignItems:"center", gap:9, padding:"12px 18px", marginBottom:14, borderRadius:16, fontSize:13.5, fontWeight:700, letterSpacing:"-0.005em", cursor:"pointer", border: growthActive?"1px solid transparent":"1px solid var(--line-2)", background: growthActive?"var(--lime)":"var(--bg)", color:"var(--ink-1)", boxShadow: growthActive?"0 10px 24px -8px var(--lime-glow)":"none", transition:"background 200ms, box-shadow 200ms, border-color 200ms"}}>
+            <span style={{display:"inline-flex", color:"var(--ink-1)"}}><GIco d={GI.bolt} size={16}/></span>
+            Больше возможностей
+          </button>
+        </div>
+        <motion.div key={growthActive?"growth":activeJourney} initial={{opacity:0, y:6}} animate={{opacity:1, y:0}} transition={{duration:0.4, ease:EASE}}
+          style={{fontSize:13, color:"var(--ink-3)", letterSpacing:"-0.005em"}}>
+          {growthActive ? GROWTH_DESC : journeys[activeJourney].desc}
+        </motion.div>
+      </motion.div>
+    </div>
+  );
+}
+/* ============================================================
+   PROGRESS RAIL
+   ============================================================ */
+function ProgressRail({steps, active, onPick}){
+  const progress = active / Math.max(1, steps.length - 1);
+  return (
+    <div className="step-rail-wrap" style={{marginBottom:48}}>
+      <div style={{display:"flex", justifyContent:"space-between", alignItems:"baseline", marginBottom:16}}>
+        <div className="eyebrow" style={{margin:0}}>Шаги сценария</div>
+        <div className="num" style={{fontSize:11, color:"var(--ink-3)", fontWeight:500, letterSpacing:"0.04em"}}>
+          {String(active+1).padStart(2,"0")} <span style={{color:"var(--ink-4)"}}>/ {String(steps.length).padStart(2,"0")}</span>
+        </div>
+      </div>
+      <div style={{position:"relative", height:1, background:"var(--line-2)", marginBottom:18}}>
+        <motion.div animate={{width:`${progress*100}%`}} transition={SPRING.silky}
+          style={{position:"absolute", inset:0, background:"var(--lime-deep)", boxShadow:"0 0 12px var(--lime-glow)"}}/>
+      </div>
+      <div className="step-rail" style={{display:"grid", gridTemplateColumns:`repeat(${steps.length}, minmax(0,1fr))`, gap:8}}>
+        {steps.map((s, i)=>{
+          const isActive = i === active, isPast = i < active;
+          return (
+            <button key={i} className="step-rail-item" onClick={()=>onPick(i)}
+              style={{textAlign:"left", padding:"14px 0 0", borderTop:`1px solid ${isActive?"var(--lime-deep)":isPast?"var(--ink-2)":"var(--line-2)"}`, marginTop:-1, transition:"border-color 250ms", background:"transparent", position:"relative", cursor:"pointer"}}>
+              {isActive && (<motion.div layoutId="step-glow" transition={SPRING.silky} style={{position:"absolute", top:-3, left:0, right:0, height:5, background:"var(--lime)", filter:"blur(8px)", opacity:0.9}}/>)}
+              <div className="num" style={{fontSize:11, fontWeight:600, color: isActive?"var(--ink-1)":isPast?"var(--ink-2)":"var(--ink-4)", letterSpacing:"0.04em", marginBottom:6}}>{String(i+1).padStart(2,"0")}</div>
+              <div style={{fontSize:13, fontWeight:isActive?600:500, color: isActive?"var(--ink-1)":isPast?"var(--ink-2)":"var(--ink-3)", lineHeight:1.3, letterSpacing:"-0.005em"}}>{s.title}</div>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   METRIC CELL
+   ============================================================ */
+function MetricCell({label, text, accent, style, cls}){
+  return (
+    <div className={cls} style={{position:"relative", ...style}}>
+      <div style={{display:"flex", alignItems:"center", gap:10, marginBottom:13}}>
+        <span style={{width:7, height:7, borderRadius:2, background: accent?"var(--lime-deep)":"var(--ink-1)", boxShadow: accent?"0 0 8px var(--lime-glow)":"none"}}/>
+        <span style={{fontSize:10, textTransform:"uppercase", letterSpacing:"0.14em", color: accent?"var(--ink-2)":"var(--ink-3)", fontWeight:700}}>{label}</span>
+      </div>
+      <div style={{fontSize:17, color:"var(--ink-1)", lineHeight:1.35, letterSpacing:"-0.01em", fontWeight:500, textWrap:"pretty"}}>{text}</div>
+    </div>
+  );
+}
+
+/* ============================================================
+   STEP INFO — text + metrics + nav ("В начало" on last step)
+   ============================================================ */
+function StepInfo({step, stepIdx, totalSteps, showMetrics, showBank=true, onPrev, onNext, onRestart}){
+  const isLast = stepIdx === totalSteps - 1;
+  return (
+    <div style={{minWidth:0, paddingTop:8}}>
+      <AnimatePresence mode="wait">
+        <motion.div key={stepIdx} initial={{opacity:0, y:14}} animate={{opacity:1, y:0}} exit={{opacity:0, y:-10}} transition={{duration:0.4, ease:EASE}}>
+          <div style={{display:"flex", alignItems:"center", gap:12, marginBottom:22, flexWrap:"wrap"}}>
+            <span className="eyebrow" style={{margin:0}}>Шаг {stepIdx+1}</span>
+            <span style={{fontSize:11, color:"var(--ink-1)", fontWeight:500, padding:"5px 12px", border:"1px solid var(--line-2)", borderRadius:999, background:"var(--surface-1)"}}>{step.zone}</span>
+          </div>
+          <h2 style={{fontSize:"clamp(32px, 4.2vw, 60px)", fontWeight:700, letterSpacing:"-0.035em", lineHeight:1.03, color:"var(--ink-1)", margin:"0 0 22px", textWrap:"balance"}}>{step.title}</h2>
+          <p style={{fontSize:17, color:"var(--ink-2)", lineHeight:1.55, margin:"0 0 34px", letterSpacing:"-0.005em", maxWidth:600, textWrap:"pretty"}}>{step.desc}</p>
+          {showMetrics && step.metricPartner && (
+            <div className="metrics-grid" style={{display:"grid", gridTemplateColumns: showBank?"1fr 1fr":"1fr", gap:0, borderTop:"1px solid var(--line-2)", borderBottom:"1px solid var(--line-2)"}}>
+              <MetricCell label="Ценность для Рег.ру" text={step.metricPartner} accent={false} cls="m-l" style={{padding: showBank?"26px 30px 26px 0":"26px 0", borderRight: showBank?"1px solid var(--line-2)":"none"}}/>
+              {showBank && <MetricCell label="Ценность для Альфа-Банка" text={step.metricBank} accent={true} cls="m-r" style={{padding:"26px 0 26px 30px"}}/>}
+            </div>
+          )}
+        </motion.div>
+      </AnimatePresence>
+      <div style={{display:"flex", gap:10, marginTop:34}}>
+        <button disabled={stepIdx===0} onClick={onPrev}
+          style={{display:"flex", alignItems:"center", gap:8, padding:"13px 22px", border:"1px solid var(--line-2)", borderRadius:12, fontSize:13, fontWeight:600, color: stepIdx===0?"var(--ink-4)":"var(--ink-1)", background:"var(--surface-1)", cursor: stepIdx===0?"default":"pointer", opacity: stepIdx===0?0.5:1, transition:"background 200ms"}}
+          onMouseEnter={e=>{ if(stepIdx>0) e.currentTarget.style.background="var(--surface-2)"; }}
+          onMouseLeave={e=>{ if(stepIdx>0) e.currentTarget.style.background="var(--surface-1)"; }}>
+          <Ico d={ICONS.arrow_l} size={14}/> Назад
+        </button>
+        {isLast ? (
+          <button onClick={onRestart}
+            style={{display:"flex", alignItems:"center", gap:9, padding:"13px 26px", border:"none", borderRadius:12, fontSize:13, fontWeight:700, color:"var(--ink-1)", background:"var(--lime)", cursor:"pointer", transition:"background 200ms", boxShadow:"0 8px 24px -6px var(--lime-glow)"}}
+            onMouseEnter={e=>e.currentTarget.style.background="var(--lime-deep)"}
+            onMouseLeave={e=>e.currentTarget.style.background="var(--lime)"}>
+            <Ico d={ICONS.restart} size={14}/> В начало
+          </button>
+        ) : (
+          <button onClick={onNext}
+            style={{display:"flex", alignItems:"center", gap:10, padding:"13px 26px", border:"none", borderRadius:12, fontSize:13, fontWeight:600, color:"#fff", background:"var(--ink-1)", cursor:"pointer", transition:"opacity 200ms", boxShadow:"0 8px 24px -6px rgba(10,10,10,0.3)"}}
+            onMouseEnter={e=>e.currentTarget.style.opacity="0.86"}
+            onMouseLeave={e=>e.currentTarget.style.opacity="1"}>
+            Далее <Ico d={ICONS.arrow_r} size={14}/>
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   MOBILE STEP NAV
+   ============================================================ */
+function MobileStepNav({current, total, onPrev, onNext}){
+  const atStart = current === 0, atEnd = current === total - 1;
+  return (
+    <div className="mobile-step-nav" role="group" aria-label="Навигация по шагам">
+      <button type="button" aria-label="Предыдущий шаг" disabled={atStart} onClick={onPrev}>
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 4L6 9l5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+      </button>
+      <div className="counter num">
+        <span style={{color:"var(--ink-1)"}}>{String(current+1).padStart(2,"0")}</span>
+        <span style={{opacity:.4,margin:"0 6px"}}>/</span>
+        <span style={{color:"var(--ink-3)"}}>{String(total).padStart(2,"0")}</span>
+      </div>
+      <button type="button" aria-label="Следующий шаг" disabled={atEnd} onClick={onNext}>
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M7 4l5 5-5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+      </button>
+    </div>
+  );
+}
+
+/* ============================================================
+   PAY MODE TOGGLE — online / offline (capability journeys)
+   ============================================================ */
+function PayModeToggle({payMode, setPayMode}){
+  const modes = [{id:"online",label:"Онлайн"},{id:"offline",label:"Офлайн"}];
+  return (
+    <div style={{display:"flex", justifyContent:"center", marginBottom:30}}>
+      <LayoutGroup id="paymode">
+        <div style={{display:"inline-flex", background:"var(--surface-1)", border:"1px solid var(--line-2)", borderRadius:14, padding:4, gap:2}}>
+          {modes.map(m=>{
+            const active = m.id===payMode;
+            return (
+              <button key={m.id} onClick={()=>setPayMode(m.id)}
+                style={{position:"relative", padding:"9px 22px", borderRadius:11, fontSize:13, fontWeight:600, color: active?"#fff":"var(--ink-2)", background:"transparent", border:"none", cursor:"pointer", zIndex:1, transition:"color 200ms"}}>
+                {active && <motion.div layoutId="paymode-pill" transition={{...SPRING.snappy}} style={{position:"absolute", inset:0, background:"var(--ink-1)", borderRadius:11, zIndex:-1}}/>}
+                {m.label}
+              </button>
+            );
+          })}
+        </div>
+      </LayoutGroup>
+    </div>
+  );
+}
+
+/* ============================================================
+   CJM SECTION
+   ============================================================ */
+function useSwipe(onLeft, onRight){
+  const sx = useRef(null), sy = useRef(null);
+  return {
+    onTouchStart:(e)=>{ const t=e.touches[0]; sx.current=t.clientX; sy.current=t.clientY; },
+    onTouchEnd:(e)=>{
+      if(sx.current==null) return;
+      const t=e.changedTouches[0];
+      const dx=t.clientX-sx.current, dy=t.clientY-sy.current;
+      sx.current=null;
+      if(Math.abs(dx)>50 && Math.abs(dx)>Math.abs(dy)*1.4){ dx<0 ? onLeft() : onRight(); }
+    }
+  };
+}
+
+function CJMSection({activeJourney, activeStep, setActiveStep, showMetrics, payMode, setPayMode}){
+  const j = journeys[activeJourney];
+  const hasVariants = !!j.variants;
+  const steps = hasVariants ? j.variants[payMode] : j.steps;
+  const safeStep = Math.min(activeStep, steps.length - 1);
+  const step = steps[safeStep];
+  const swipe = useSwipe(
+    ()=>setActiveStep(p=>Math.min(steps.length-1, p+1)),
+    ()=>setActiveStep(p=>Math.max(0, p-1))
+  );
+  return (
+    <section className="section" style={{maxWidth:1320, margin:"0 auto", padding:"18px 40px 24px", position:"relative"}}>
+      {hasVariants && <PayModeToggle payMode={payMode} setPayMode={setPayMode}/>}
+      <ProgressRail steps={steps} active={safeStep} onPick={setActiveStep}/>
+      <div className="work-grid" style={{display:"grid", gridTemplateColumns:"minmax(340px, 0.9fr) minmax(0, 1.2fr)", gap:80, alignItems:"start"}}>
+        <div className="phone-wrap" {...swipe} style={{display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"flex-start", gap:16}}>
+          <Laptop screenKey={step.screen}/>
+          <MobileStepNav current={safeStep} total={steps.length}
+            onPrev={()=>setActiveStep(p=>Math.max(0, p-1))}
+            onNext={()=>setActiveStep(p=>Math.min(steps.length-1, p+1))}/>
+        </div>
+        <StepInfo step={step} stepIdx={safeStep} totalSteps={steps.length} showMetrics={showMetrics}
+          onPrev={()=>setActiveStep(p=>Math.max(0, p-1))}
+          onNext={()=>setActiveStep(p=>Math.min(steps.length-1, p+1))}
+          onRestart={()=>setActiveStep(0)}/>
+      </div>
+    </section>
+  );
+}
+
+/* ============================================================
+   BENEFITS — 3 groups (Клиент / Рег.ру / Альфа-Банк)
+   ============================================================ */
+function BenefitCard({item, index, inView, accentMode, large}){
+  const [hover, setHover] = useState(false);
+  return (
+    <motion.div
+      initial={{opacity:0, y:30}} animate={inView?{opacity:1, y:0}:{}} transition={{duration:0.7, ease:EASE, delay:index*0.06}}
+      onMouseEnter={()=>setHover(true)} onMouseLeave={()=>setHover(false)} className={large?"b-large":""}
+      style={{gridColumn: large?"span 2":"span 1", gridRow:"span 1", background:"#17191D", border:"1px solid rgba(255,255,255,0.10)", borderRadius:"var(--radius-lg)", padding:large?"34px 30px":"26px 22px", position:"relative", overflow:"hidden", transition:"border-color 300ms", cursor:"default"}}>
+      <motion.div animate={{opacity:hover?1:0}} transition={{duration:0.4}} style={{position:"absolute", inset:0, pointerEvents:"none", background:"radial-gradient(circle at 80% 0%, rgba(53,203,99,0.26), transparent 62%)"}}/>
+      <motion.div animate={{opacity:hover?1:0}} transition={{duration:0.3}} style={{position:"absolute", inset:0, borderRadius:"var(--radius-lg)", pointerEvents:"none", border:"1px solid var(--lime-deep)"}}/>
+      <div style={{position:"relative", zIndex:1, height:"100%", display:"flex", flexDirection:"column"}}>
+        <div style={{display:"flex", alignItems:"flex-start", justifyContent:"space-between", marginBottom:large?26:18, gap:16}}>
+          <motion.div animate={{y: hover?-2:0}} transition={{duration:0.3}}
+            style={{width:large?52:42, height:large?52:42, borderRadius:12, color: accentMode?"#14170F":"#F4F6F8", background: accentMode?"var(--lime)":"rgba(255,255,255,0.09)", border: accentMode?"1px solid var(--lime-deep)":"1px solid rgba(255,255,255,0.14)", display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0}}>
+            <Ico d={ICONS[item.icon]} size={large?24:20}/>
+          </motion.div>
+          {item.accent && (
+            <div className="num" style={{fontSize: large?34:20, fontWeight:800, letterSpacing:"-0.03em", color: accentMode?"#14170F":"#F4F6F8", lineHeight:1, background: accentMode?"var(--lime)":"transparent", padding: accentMode?"4px 12px":0, borderRadius: accentMode?10:0}}>{item.accent}</div>
+          )}
+        </div>
+        <div style={{fontSize: large?22:16.5, fontWeight:600, color:"#F4F6F8", marginBottom:9, letterSpacing:"-0.015em", lineHeight:1.2}}>{item.title}</div>
+        <div style={{fontSize: large?15:13, color:"rgba(244,246,248,0.60)", lineHeight:1.55, letterSpacing:"-0.005em", marginTop:"auto"}}>{item.desc}</div>
+      </div>
+    </motion.div>
+  );
+}
+function BenefitGroup({eyebrow, title, sub, items, accentMode}){
+  const [ref, inView] = useReveal(true, 0.15);
+  return (
+    <div ref={ref} style={{marginTop:72}}>
+      <motion.div initial={{opacity:0, y:20}} animate={inView?{opacity:1, y:0}:{}} transition={{duration:0.7, ease:EASE}} style={{marginBottom:40, maxWidth:680}}>
+        <div className="eyebrow" style={{color:"var(--ink-3)", marginBottom:13}}>{eyebrow}</div>
+        <h3 style={{fontSize:"clamp(30px, 4.4vw, 58px)", fontWeight:700, letterSpacing:"-0.035em", lineHeight:1.05, color:"var(--ink-1)", margin:"0 0 13px", textWrap:"balance"}}>{title}</h3>
+        <div style={{fontSize:15, color:"var(--ink-3)", letterSpacing:"-0.005em"}}>{sub}</div>
+      </motion.div>
+      <div className="bento-grid" style={{display:"grid", gridTemplateColumns:"repeat(3, minmax(0, 1fr))", gridAutoRows:"minmax(210px, auto)", gap:12}}>
+        {items.map((b, i)=>(<BenefitCard key={i} item={b} index={i} inView={inView} accentMode={accentMode} large={i===0}/>))}
+      </div>
+    </div>
+  );
+}
+function BenefitsSection(){
+  return (
+    <section className="section" style={{maxWidth:1320, margin:"0 auto", padding:"0 40px 70px"}}>
+      <BenefitGroup eyebrow="01 / Клиент" title="Преимущества для клиента" sub="Что получает клиент и партнёр Рег.ру" items={benefitsClient} accentMode={false}/>
+      <BenefitGroup eyebrow="02 / Рег.ру" title="Преимущества для Рег.ру" sub="Что даёт Рег.ру встроенный кошелёк" items={benefitsPartner} accentMode={false}/>
+      <BenefitGroup eyebrow="03 / Альфа-Банк" title="Ценность для Альфа-Банка" sub="Стратегические эффекты партнёрского канала" items={benefitsBank} accentMode={false}/>
+    </section>
+  );
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+function Footer(){
+  return (
+    <footer style={{maxWidth:1320, margin:"0 auto", padding:"40px 40px 60px", borderTop:"1px solid var(--line-1)", display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:16}}>
+      <div style={{display:"flex", alignItems:"center", gap:12}}>
+        <BrandLogo height={34}/>
+        <span style={{fontSize:11, color:"var(--ink-3)", fontWeight:500, letterSpacing:"-0.005em"}}>xWallet B2B · кошелёк для бизнеса · 2026</span>
+      </div>
+      <span style={{fontSize:11, color:"var(--ink-4)", letterSpacing:"0.04em"}}>Услугу оказывает АО «Альфа-Банк»</span>
+    </footer>
+  );
+}
+
+/* ============================================================
+   NEW GROWTH SECTION — banking layer (light, highlighted)
+   ============================================================ */
+const GROWTH=[
+  {id:"escrow", tag:"Сделки по доменам", icon:"shield", badge:"Только банк · эскроу", bankOnly:true,
+   title:"Эскроу для сделок по доменам",
+   painGA:"Покупка домена с рук — сделка на доверии: продавец боится не получить деньги, покупатель — не получить домен",
+   steps:[
+     {title:"Деньги в эскроу", zone:"Эскроу", screen:"gp_escrow",
+      desc:"Покупатель вносит сумму за домен на эскроу-счёт. Деньги заморожены: продавец видит, что оплата обеспечена, и запускает передачу прав.",
+      metricPartner:"Рег.ру становится площадкой безопасных доменных сделок, а не только регистратором.",
+      metricBank:"Эскроу-счета — продукт, недоступный НКО-конкурентам."},
+     {title:"Передача не состоялась", zone:"Эскроу", screen:"gp_esc_refund",
+      desc:"Если домен не передан в срок, деньги возвращаются покупателю автоматически — без разбирательств и переписки с поддержкой.",
+      metricPartner:"Снимается главный страх вторичного рынка доменов.",
+      metricBank:"Контролируемый арбитраж внутри банковского контура."},
+     {title:"Сделка закрыта", zone:"Рег.ру", screen:"gp_esc_stay",
+      desc:"Домен переоформлен — деньги уходят продавцу, комиссия площадки удерживается автоматически. Обе стороны получают документы.",
+      metricPartner:"Комиссия с каждой сделки вторичного рынка.",
+      metricBank:"Новый тип оборота и документальный след по сделке."},
+   ]},
+  {id:"credit", tag:"Оплата частями", icon:"card", badge:"Только банк · лимит", bankOnly:true,
+   title:"Оплата частями на инфраструктуру",
+   painGA:"Выделенный сервер и лицензии на год — крупная сумма, которая не проходит в текущем квартале, и сделка откладывается",
+   steps:[
+     {title:"Оффер на оплате", zone:"Рег.ру", screen:"gp_gift_wish",
+      desc:"На дорогом тарифе появляется вариант оплаты частями: 3, 6 или 12 месяцев с понятным платежом в месяц.",
+      metricPartner:"Дорогие тарифы перестают упираться в бюджет квартала.",
+      metricBank:"Кредитный продукт встроен прямо в момент покупки."},
+     {title:"Решение по обороту", zone:"Банк", screen:"gp_gift",
+      desc:"Лимит рассчитывается по оборотам расчётного счёта — решение онлайн, без залога и визита в отделение.",
+      metricPartner:"Одобрение в момент сделки, а не через неделю.",
+      metricBank:"Скоринг на собственных данных по счёту — минимальный риск."},
+     {title:"Сервер работает", zone:"Рег.ру", screen:"gp_gift_done",
+      desc:"Рег.ру получает всю сумму сразу, клиент платит частями. График виден в кошельке, списания автоматические.",
+      metricPartner:"Рост среднего чека без кассового разрыва.",
+      metricBank:"Процентный доход и регулярные списания."},
+   ]},
+  {id:"kopilka", tag:"Остатки", icon:"piggy", badge:"Только банк · % на остаток", bankOnly:true,
+   title:"Процент на остаток кошелька",
+   painGA:"Бюджет на инфраструктуру лежит на балансе мёртвым грузом — у НКО-кошельков он просто не работает",
+   steps:[
+     {title:"Бюджет на инфраструктуру", zone:"xWallet", screen:"gp_kop_goal",
+      desc:"Компания заранее закладывает сумму на домены, хостинг и серверы на квартал вперёд и держит её на кошельке.",
+      metricPartner:"Деньги зарезервированы под услуги Рег.ру, а не под конкурента.",
+      metricBank:"Предсказуемая депозитная база от юрлиц."},
+     {title:"Остаток работает", zone:"xWallet", screen:"gp_kopilka",
+      desc:"На неизрасходованный остаток начисляются проценты — до 3% годовых, как на расчётном счёте. У небанковских кошельков этого нет.",
+      metricPartner:"Держать бюджет на xWallet выгоднее, чем платить разово.",
+      metricBank:"Средства остаются в банке дольше — ключевое отличие от НКО."},
+     {title:"Списание по мере нужды", zone:"Рег.ру", screen:"gp_kop_done",
+      desc:"Услуги списываются с кошелька по мере продления, накопленный процент идёт в зачёт следующих платежей.",
+      metricPartner:"Гарантированная конверсия остатка в оплаченные услуги.",
+      metricBank:"Клиент остаётся в платёжном цикле банка."},
+   ]},
+  {id:"replenish", tag:"Выплаты", icon:"refresh", badge:"Только банк · массовые выплаты", bankOnly:true,
+   title:"Выплаты реселлерам и подрядчикам",
+   painGA:"Партнёрские вознаграждения и оплата фрилансерам идут реестрами через бухгалтерию — долго, с комиссией и ручной сверкой",
+   steps:[
+     {title:"Реестр выплат", zone:"Рег.ру", screen:"gp_rep_setup",
+      desc:"Партнёрские вознаграждения реселлерам и оплата подрядчикам — вебмастерам, дизайнерам, самозанятым — формируются в кабинете одним реестром.",
+      metricPartner:"Партнёрская программа становится конкурентным преимуществом.",
+      metricBank:"Массовые выплаты — объёмный продукт для юрлиц."},
+     {title:"Моментальное зачисление", zone:"xWallet", screen:"gp_replenish",
+      desc:"Деньги приходят на кошелёк получателя сразу, а не на третий день. Налоговый статус самозанятых проверяется автоматически.",
+      metricPartner:"Партнёры активнее продают, получая деньги быстро.",
+      metricBank:"Новые клиенты приходят через выплаты и остаются в банке."},
+     {title:"Обратно в оборот", zone:"Рег.ру", screen:"gp_rep_spend",
+      desc:"Реселлер тратит вознаграждение здесь же — на домены и хостинг для своих клиентов. Деньги не выводятся из экосистемы.",
+      metricPartner:"Выплаты возвращаются в выручку площадки.",
+      metricBank:"Замкнутый оборот внутри банковского контура."},
+   ]},
+];
+const GROWTH_RADAR=[
+  {icon:"layers", title:"Моментальные выплаты реселлерам", desc:"Моментальные выплаты реселлерам и партнёрам без банковской комиссии — выручка приходит на кошелёк сразу."},
+  {icon:"crown", title:"Статусная программа xWallet Pro", desc:"Уровни статуса клиента → банковские перки: повышенный кэшбэк, бесплатная рассрочка, приоритет поддержки."},
+  {icon:"link", title:"Кошелёк для корпоративных заказов", desc:"Расчётный кошелёк для агентств и веб-студий: оплата услуг за клиентов, акты, закрывающие документы, интеграция с 1С."},
+];
+
+function NewGrowth({showMetrics}){
+  const [gi, setGi] = useState(0);
+  const [gstep, setGstep] = useState(0);
+  const g = GROWTH[gi];
+  const steps = g.steps;
+  const safe = Math.min(gstep, steps.length - 1);
+  const step = steps[safe];
+  const swipe = useSwipe(
+    ()=>setGstep(p=>Math.min(steps.length-1, p+1)),
+    ()=>setGstep(p=>Math.max(0, p-1))
+  );
+  const [hRef, hIn] = useReveal(true, 0.2);
+  const [rRef, rIn] = useReveal(true, 0.15);
+  useEffect(()=>{ setGstep(0); }, [gi]);
+  return (
+    <section className="ng" style={{maxWidth:1320, margin:"0 auto", padding:"50px 40px 100px", position:"relative", overflow:"hidden", color:"var(--ink-1)"}}>
+      <div style={{position:"absolute", top:-120, right:-90, width:520, height:520, borderRadius:"50%", background:"radial-gradient(circle, rgba(53,203,99,0.26) 0%, rgba(53,203,99,0) 66%)", filter:"blur(64px)", pointerEvents:"none"}}/>
+      <div style={{maxWidth:1320, margin:"0 auto", position:"relative"}}>
+
+        <motion.div ref={hRef} initial={{opacity:0, y:24}} animate={hIn?{opacity:1, y:0}:{}} transition={{duration:0.8, ease:EASE}} style={{marginBottom:30, maxWidth:800}}>
+          <div className="eyebrow" style={{marginBottom:16}}>Больше возможностей</div>
+          <h2 style={{fontSize:"clamp(32px, 5vw, 64px)", fontWeight:800, letterSpacing:"-0.04em", lineHeight:1.0, margin:"0 0 16px", color:"var(--ink-1)"}}>
+            Что ещё <span className="mark-hl"><span>умеет кошелёк</span></span>
+          </h2>
+          <p style={{fontSize:16, color:"var(--ink-2)", lineHeight:1.55, letterSpacing:"-0.005em", margin:0}}>
+            Принять платёж умеет любой сервис. Эскроу, оплату частями и проценты на остаток — только банк с лицензией. Каждый сценарий ниже закрывает конкретную боль клиента Рег.ру.
+          </p>
+        </motion.div>
+
+        <LayoutGroup id="ng">
+          <div className="ng-pills" style={{display:"inline-flex", background:"var(--surface-1)", border:"1px solid var(--line-2)", borderRadius:18, padding:5, gap:2, marginBottom:36, maxWidth:"100%", flexWrap:"wrap"}}>
+            {GROWTH.map((it,i)=>{
+              const active = i===gi;
+              return (
+                <button key={it.id} onClick={()=>setGi(i)}
+                  style={{position:"relative", padding:"11px 16px", borderRadius:14, fontSize:13, fontWeight:600, letterSpacing:"-0.005em", color: active?"#fff":"var(--ink-2)", display:"flex", alignItems:"center", gap:8, zIndex:1, background:"transparent", border:"none", cursor:"pointer", transition:"color 200ms", whiteSpace:"nowrap"}}>
+                  {active && <motion.div layoutId="ng-pill" transition={{...SPRING.snappy}} style={{position:"absolute", inset:0, background:"var(--ink-1)", borderRadius:14, zIndex:-1, boxShadow:"0 8px 20px -6px rgba(10,10,10,0.30)"}}/>}
+                  <span style={{display:"inline-flex", color: active?"var(--lime)":"var(--ink-3)"}}><GIco d={GI[it.icon]} size={16}/></span>
+                  {it.tag}
+                </button>
+              );
+            })}
+          </div>
+        </LayoutGroup>
+
+        <motion.div key={g.id} initial={{opacity:0, y:12}} animate={{opacity:1, y:0}} transition={{duration:0.4, ease:EASE}}
+          style={{display:"flex", alignItems:"center", gap:14, flexWrap:"wrap", marginBottom:30}}>
+          <div style={{display:"inline-flex", alignItems:"center", gap:8, padding:"6px 13px", borderRadius:999, background: g.bankOnly?"var(--lime)":"var(--surface-1)", border: g.bankOnly?"none":"1px solid var(--line-2)"}}>
+            <span style={{width:6, height:6, borderRadius:"50%", background: g.bankOnly?"var(--ink-1)":"var(--lime-deep)"}}/>
+            <span style={{fontSize:11, fontWeight:700, letterSpacing:"0.04em", textTransform:"uppercase", color:"var(--ink-1)"}}>{g.badge}</span>
+          </div>
+          <div style={{fontSize:13.5, color:"var(--ink-2)", fontWeight:500, letterSpacing:"-0.005em"}}>
+            <span style={{color:"var(--ink-3)"}}>Проблема: </span>{g.painGA}
+          </div>
+        </motion.div>
+
+        <ProgressRail steps={steps} active={safe} onPick={setGstep}/>
+        <div className="work-grid" style={{display:"grid", gridTemplateColumns:"minmax(340px, 0.9fr) minmax(0, 1.2fr)", gap:80, alignItems:"start"}}>
+          <div className="phone-wrap" {...swipe} style={{display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"flex-start", gap:16}}>
+            <Laptop screenKey={step.screen}/>
+            <MobileStepNav current={safe} total={steps.length}
+              onPrev={()=>setGstep(p=>Math.max(0, p-1))}
+              onNext={()=>setGstep(p=>Math.min(steps.length-1, p+1))}/>
+          </div>
+          <StepInfo step={step} stepIdx={safe} totalSteps={steps.length} showMetrics={showMetrics} showBank={false}
+            onPrev={()=>setGstep(p=>Math.max(0, p-1))}
+            onNext={()=>setGstep(p=>Math.min(steps.length-1, p+1))}
+            onRestart={()=>setGstep(0)}/>
+        </div>
+
+        <div ref={rRef} style={{marginTop:84}}>
+          <div className="eyebrow no-mark" style={{color:"var(--ink-3)", marginBottom:24, fontWeight:600, letterSpacing:"0.16em", fontSize:10}}>Идеи на следующий этап</div>
+          <div className="ng-extra-grid">
+            {GROWTH_RADAR.map((c,i)=>(
+              <motion.div key={i} initial={{opacity:0, y:26}} animate={rIn?{opacity:1, y:0}:{}} transition={{duration:0.7, ease:EASE, delay:i*0.1}}
+                style={{padding:"28px 26px 30px", borderBottom:"1px solid var(--line-2)", borderRight:(i%3!==2)?"1px solid var(--line-2)":"none"}}>
+                <div style={{width:44, height:44, borderRadius:12, background:"var(--surface-1)", border:"1px solid var(--line-2)", display:"flex", alignItems:"center", justifyContent:"center", color:"var(--ink-1)", marginBottom:16}}><GIco d={GI[c.icon]} size={22}/></div>
+                <div style={{fontSize:16.5, fontWeight:600, color:"var(--ink-1)", marginBottom:8, letterSpacing:"-0.015em", lineHeight:1.2}}>{c.title}</div>
+                <div style={{fontSize:13, color:"var(--ink-3)", lineHeight:1.55}}>{c.desc}</div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        <div style={{marginTop:46, paddingTop:24, borderTop:"1px solid var(--line-2)", fontSize:13, color:"var(--ink-3)", letterSpacing:"-0.005em"}}>
+          Платёжный кошелёк может сделать любой сервис. А вот выплаты реселлерам за секунды, оплату частями и проценты на остаток — только банк с лицензией.
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ============================================================
+   APP
+   ============================================================ */
+function App(){
+  const [activeJourney, setActiveJourney] = useState(0);
+  const [activeStep, setActiveStep] = useState(0);
+  const [payMode, setPayMode] = useState("online");
+  const [showMetrics, setShowMetrics] = useState(true);
+  const [scrolled, setScrolled] = useState(false);
+  const [view, setView] = useState("cjm");
+  const [clientType, setClientType] = useState("new");
+  const firstRun = useRef(true);
+  useGlobalSpotlight();
+  useEffect(()=>{ setActiveStep(0); }, [activeJourney, payMode]);
+  useEffect(()=>{
+    const onScroll = ()=> setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener('scroll', onScroll, {passive:true});
+    return ()=>window.removeEventListener('scroll', onScroll);
+  },[]);
+  useEffect(()=>{
+    if(firstRun.current){ firstRun.current = false; return; }
+    requestAnimationFrame(()=>{
+      const el = document.getElementById('view-anchor');
+      if(el) window.scrollTo({top: Math.max(0, el.offsetTop - 12), behavior:'smooth'});
+    });
+  }, [view]);
+  return (
+    <div style={{minHeight:"100vh"}}>
+      <Navbar scrolled={scrolled}/>
+      <Hero view={view} setView={setView} activeJourney={activeJourney} setActiveJourney={setActiveJourney} clientType={clientType} setClientType={setClientType}/>
+      <RKOSection/>
+      <div id="view-anchor">
+        {view === "cjm"
+          ? <CJMSection activeJourney={activeJourney} activeStep={activeStep} setActiveStep={setActiveStep} showMetrics={showMetrics} payMode={payMode} setPayMode={setPayMode}/>
+          : <NewGrowth showMetrics={showMetrics}/>}
+        <BenefitsSection/>
+      </div>
+      <Footer/>
+    </div>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App/>);
+</script>
+</body>
+</html>
